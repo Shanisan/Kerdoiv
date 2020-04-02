@@ -4,6 +4,7 @@ import hu.alkfejl.controller.ControllerImpl;
 import hu.alkfejl.view.AddKerdoivDialog;
 import hu.alkfejl.view.KerdoivekTablazat;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
@@ -22,8 +23,7 @@ public class App extends Application {
         switch (t){
             case KERDOIV:
                 tableText.setText("Kérdőívek listája");
-                table=null;
-                table = new KerdoivekTablazat(controller.getKerdoiv());
+                table.setItems(FXCollections.observableList(controller.getKerdoiv()));
                 break;
         }
         return;
