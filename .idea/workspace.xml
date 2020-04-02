@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f15c968f-55fe-4d6c-9459-0a538b399487" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kerdoiv.db" beforeDir="false" afterPath="$PROJECT_DIR$/kerdoiv.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/alkfejl/model/bean/Kerdoiv.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/alkfejl/model/bean/Kerdoiv.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/alkfejl/view/KerdoivekTablazat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/alkfejl/view/KerdoivekTablazat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/hu/alkfejl/view/KerdoivekTablazat.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/hu/alkfejl/view/KerdoivekTablazat.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,10 +121,22 @@
       <workItem from="1582031454897" duration="103000" />
       <workItem from="1582211445311" duration="4575000" />
     </task>
+    <task id="LOCAL-00001" summary="kerdoiv lekerdezheto">
+      <created>1585846484413</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1585846484414</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="kerdoiv lekerdezheto" />
+    <option name="LAST_COMMIT_MESSAGE" value="kerdoiv lekerdezheto" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="238" key="#Project_Structure" timestamp="1585829858311">
@@ -161,10 +169,10 @@
     </state>
     <state x="693" y="306" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/-1280.174.1280.984/0.0.1920.1160@0.0.1920.1160" timestamp="1585838938879" />
     <state x="693" y="278" width="526" height="505" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1054@0.0.1920.1054" timestamp="1582031536921" />
-    <state x="614" y="174" key="CommitChangelistDialog2" timestamp="1585846455619">
+    <state x="614" y="174" key="CommitChangelistDialog2" timestamp="1585846483765">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state x="614" y="174" key="CommitChangelistDialog2/-1280.174.1280.984/0.0.1920.1160@0.0.1920.1160" timestamp="1585846455619" />
+    <state x="614" y="174" key="CommitChangelistDialog2/-1280.174.1280.984/0.0.1920.1160@0.0.1920.1160" timestamp="1585846483765" />
     <state x="739" y="338" key="FileChooserDialogImpl" timestamp="1585846057549">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
@@ -210,6 +218,10 @@
     </state>
     <state x="456" y="178" key="SettingsEditor/-1280.174.1280.984/0.0.1920.1160@0.0.1920.1160" timestamp="1585836371691" />
     <state x="456" y="162" width="1007" height="736" key="SettingsEditor/0.0.1920.1054@0.0.1920.1054" timestamp="1582211481462" />
+    <state x="552" y="313" key="Vcs.Push.Dialog.v2" timestamp="1585846486966">
+      <screen x="0" y="0" width="1920" height="1160" />
+    </state>
+    <state x="552" y="313" key="Vcs.Push.Dialog.v2/-1280.174.1280.984/0.0.1920.1160@0.0.1920.1160" timestamp="1585846486966" />
     <state x="769" y="497" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1585845301842">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
