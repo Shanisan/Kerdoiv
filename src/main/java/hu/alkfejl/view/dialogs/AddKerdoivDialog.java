@@ -1,10 +1,9 @@
-package hu.alkfejl.view;
+package hu.alkfejl.view.dialogs;
 
+import hu.alkfejl.App;
 import hu.alkfejl.controller.Controller;
-import hu.alkfejl.model.bean.Kerdes;
 import hu.alkfejl.model.bean.Kerdoiv;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -35,15 +34,16 @@ public class AddKerdoivDialog {
         ok.setDefaultButton(true);
         ok.setOnAction(e -> {
             if(nameTF.getText().isEmpty()){
-                showWarning("Nem lehet üres a név!");
+                WarningShower.showWarning("Nem lehet üres a név!");
                 return;
             }
             Kerdoiv k = new Kerdoiv(nameTF.getText());
 
             if(c.addKerdoiv(k)){
+                App.TVC.refreshTable();
                 stage.close();
             } else {
-                showWarning("Hiba történt!");
+                WarningShower.showWarning("Hiba történt!");
                 return;
             }
         });
@@ -55,13 +55,5 @@ public class AddKerdoivDialog {
         stage.setScene(scene);
 
         stage.show();
-    }
-
-    private void showWarning(String message){
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setContentText(message);
-        alert.setHeaderText(null);
-        alert.setTitle("Hiba");
-        alert.showAndWait();
     }
 }

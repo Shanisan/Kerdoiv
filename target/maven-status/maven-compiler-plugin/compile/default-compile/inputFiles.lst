@@ -1,10 +1,14 @@
 C:\Users\barat\IdeaProjects\Kerdoiv\src\main\java\hu\alkfejl\model\bean\Kerdoiv.java
-C:\Users\barat\IdeaProjects\Kerdoiv\src\main\java\hu\alkfejl\controller\ControllerImpl.java
-C:\Users\barat\IdeaProjects\Kerdoiv\src\main\java\hu\alkfejl\controller\Controller.java
+C:\Users\barat\IdeaProjects\Kerdoiv\src\main\java\hu\alkfejl\view\TableViewController.java
 C:\Users\barat\IdeaProjects\Kerdoiv\src\main\java\hu\alkfejl\model\bean\Kerdes.java
 C:\Users\barat\IdeaProjects\Kerdoiv\src\main\java\hu\alkfejl\model\KerdesTipus.java
 C:\Users\barat\IdeaProjects\Kerdoiv\src\main\java\hu\alkfejl\view\AddKerdoivDialog.java
+C:\Users\barat\IdeaProjects\Kerdoiv\src\main\java\hu\alkfejl\view\KerdesekTablazat.java
+C:\Users\barat\IdeaProjects\Kerdoiv\src\main\java\hu\alkfejl\view\TableSetter.java
+C:\Users\barat\IdeaProjects\Kerdoiv\src\main\java\hu\alkfejl\controller\ControllerImpl.java
+C:\Users\barat\IdeaProjects\Kerdoiv\src\main\java\hu\alkfejl\controller\Controller.java
 C:\Users\barat\IdeaProjects\Kerdoiv\src\main\java\hu\alkfejl\model\DAO_DB.java
+C:\Users\barat\IdeaProjects\Kerdoiv\src\main\java\hu\alkfejl\view\ButtonRow.java
 C:\Users\barat\IdeaProjects\Kerdoiv\src\main\java\hu\alkfejl\view\KerdoivekTablazat.java
 C:\Users\barat\IdeaProjects\Kerdoiv\src\main\java\hu\alkfejl\App.java
 C:\Users\barat\IdeaProjects\Kerdoiv\src\main\java\hu\alkfejl\model\DAO.java

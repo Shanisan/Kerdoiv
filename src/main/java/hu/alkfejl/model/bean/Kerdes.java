@@ -8,61 +8,63 @@ import javafx.beans.property.StringProperty;
 public class Kerdes {
     private StringProperty szoveg = new SimpleStringProperty();
     private IntegerProperty tipus = new SimpleIntegerProperty();
+    private IntegerProperty id = new SimpleIntegerProperty();
+    private IntegerProperty kerdoivId = new SimpleIntegerProperty();
     private IntegerProperty sorszam = new SimpleIntegerProperty();
+    private IntegerProperty valaszokSzama = new SimpleIntegerProperty();
     private StringProperty kep = new SimpleStringProperty();
 
-    public Kerdes(StringProperty szoveg, IntegerProperty tipus, IntegerProperty sorszam, StringProperty kep) {
-        this.szoveg = szoveg;
-        this.tipus = tipus;
-        this.sorszam = sorszam;
-        this.kep = kep;
+    public Kerdes(int id, String szoveg, int kerdoivId, int tipus, int sorszam, String kep, int valaszokSzama) {
+        this.setId(id);
+        this.setKerdoivId(kerdoivId);
+        this.setSzoveg(szoveg);
+        this.setTipus(tipus);
+        this.setSorszam(sorszam);
+        this.setValaszokSzama(valaszokSzama);
+        this.setKep(kep);
     }
+    //region getter-setter
 
-    public String getSzoveg() {
-        return szoveg.get();
-    }
+    public int getKerdoivId() {return kerdoivId.get();}
 
-    public StringProperty szovegProperty() {
-        return szoveg;
-    }
+    public IntegerProperty kerdoivIdProperty() {return kerdoivId;}
 
-    public void setSzoveg(String szoveg) {
-        this.szoveg.set(szoveg);
-    }
+    public void setKerdoivId(int kerdoivId) {this.kerdoivId.set(kerdoivId);}
 
-    public int getTipus() {
-        return tipus.get();
-    }
+    public int getValaszokSzama() {return valaszokSzama.get();}
 
-    public IntegerProperty tipusProperty() {
-        return tipus;
-    }
+    public IntegerProperty valaszokSzamaProperty() {return valaszokSzama;}
 
-    public void setTipus(int tipus) {
-        this.tipus.set(tipus);
-    }
+    public void setValaszokSzama(int valaszokSzama) {this.valaszokSzama.set(valaszokSzama);}
 
-    public int getSorszam() {
-        return sorszam.get();
-    }
+    public int getId() {return id.get();}
 
-    public IntegerProperty sorszamProperty() {
-        return sorszam;
-    }
+    public IntegerProperty idProperty() {return id;}
 
-    public void setSorszam(int sorszam) {
-        this.sorszam.set(sorszam);
-    }
+    public void setId(int id) {this.id.set(id);}
 
-    public String getKep() {
-        return kep.get();
-    }
+    public String getSzoveg() {return szoveg.get();}
 
-    public StringProperty kepProperty() {
-        return kep;
-    }
+    public StringProperty szovegProperty() {return szoveg;}
 
-    public void setKep(String kep) {
-        this.kep.set(kep);
-    }
+    public void setSzoveg(String szoveg) {this.szoveg.set(szoveg);}
+
+    public int getTipus() {return tipus.get();}
+
+    public IntegerProperty tipusProperty() {return tipus;}
+
+    public void setTipus(int tipus) {this.tipus.set(tipus);}
+
+    public int getSorszam() {return sorszam.get();}
+
+    public IntegerProperty sorszamProperty() {return sorszam;}
+
+    public void setSorszam(int sorszam) {this.sorszam.set(sorszam);}
+
+    public String getKep() {return kep.get();}
+
+    public StringProperty kepProperty() {return kep;}
+
+    public void setKep(String kep) {this.kep.set(kep);}
+    //endregion
 }

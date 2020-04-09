@@ -8,6 +8,13 @@ import javafx.beans.property.StringProperty;
 public class Kerdoiv {
     private IntegerProperty id = new SimpleIntegerProperty();
     private StringProperty nev = new SimpleStringProperty();
+    private IntegerProperty kitoltesek = new SimpleIntegerProperty();
+
+    public int getKitoltesek() {return kitoltesek.get();}
+
+    public IntegerProperty kitoltesekProperty() {return kitoltesek;}
+
+    public void setKitoltesek(int kitoltesek) {this.kitoltesek.set(kitoltesek);}
 
     public int getKerdesekSzama() {
         return kerdesekSzama.get();
@@ -56,10 +63,11 @@ public class Kerdoiv {
                 '}';
     }
 
-    public Kerdoiv(int id, String nev, int kerdesekSzama) {
+    public Kerdoiv(int id, String nev, int kerdesekSzama, int kitoltesek) {
         this.setId(id);
         this.setNev(nev);
         this.setKerdesekSzama(kerdesekSzama);
+        this.setKitoltesek(kitoltesek);
     }
 
     public Kerdoiv(String nev) {
