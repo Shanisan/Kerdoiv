@@ -3,17 +3,14 @@ package hu.alkfejl.view;
 import hu.alkfejl.App;
 import hu.alkfejl.controller.ControllerImpl;
 import hu.alkfejl.model.bean.Kerdoiv;
-import javafx.scene.Scene;
 import javafx.scene.control.TableView;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 public class TableViewController {
     private ControllerImpl controller;
     private TableSetter currentlyActiveTable = TableSetter.KERDOIV;
     KerdoivekTablazat kivtable;
     KerdesekTablazat kstable;
-    int kerdesID;
+    int kerdoivID;
 
     public TableViewController(ControllerImpl controller) {
         this.controller = controller;
@@ -35,8 +32,8 @@ public class TableViewController {
                     break;
                 case KERDES:
                     Kerdoiv k = (Kerdoiv) kivtable.getSelectionModel().getSelectedItem();
-                    kerdesID = k.getId();
-                    kstable = new KerdesekTablazat(controller.getKerdes(kerdesID));
+                    kerdoivID = k.getId();
+                    kstable = new KerdesekTablazat(controller.getKerdes(kerdoivID));
                     App.refreshTable("A '"+k.getNev()+"' kérdőívhez kapcsolódó kérdések");
                     System.out.println("Set the table to show questions from questionare " + k.getId());
                     //this.currentlyActiveTable=TableSetter.KERDOIV;
@@ -58,7 +55,7 @@ public class TableViewController {
                     kivtable.refresh(App.controller.getKerdoiv());
                     break;
                 case KERDES:
-                    kstable.refresh(App.controller.getKerdes(kerdesID));
+                    kstable.refresh(App.controller.getKerdes(kerdoivID));
                     break;
                 case VALASZ:
                     break;
@@ -83,4 +80,6 @@ public class TableViewController {
         }
         return null;
     }
+
+    public int getKerdoivID() {return kerdoivID;}
 }

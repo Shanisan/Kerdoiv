@@ -23,8 +23,6 @@ public class AddKerdoivDialog {
         pane.add(new Label("Név"), 0, 0);
         pane.add(nameTF, 1, 0);
 
-        pane.add(new Label("Szül év"), 0, 1);
-
         Button cancel = new Button("Cancel");
         cancel.setOnAction(e -> {
             stage.close();

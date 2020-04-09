@@ -1,6 +1,7 @@
 package hu.alkfejl.view;
 
 import hu.alkfejl.App;
+import hu.alkfejl.view.dialogs.AddKerdesDialog;
 import hu.alkfejl.view.dialogs.AddKerdoivDialog;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -38,6 +39,7 @@ public class ButtonRow extends HBox {
             new AddKerdoivDialog(App.controller);
         });
         addKerdes.setOnAction(e -> {
+            new AddKerdesDialog(App.controller, App.TVC.kerdoivID);
         });
         switchButtonRow();
         this.setPadding(new Insets(5));
@@ -52,7 +54,7 @@ public class ButtonRow extends HBox {
                 break;
             case KERDES:
                 displayNone();
-                this.getChildren().addAll(vissza, frissites, valaszok);
+                this.getChildren().addAll(vissza, addKerdes, frissites, valaszok);
                 break;
             case VALASZ:
                 break;

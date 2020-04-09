@@ -3,14 +3,15 @@ hu\alkfejl\model\DAO_DB.class
 hu\alkfejl\view\KerdoivekTablazat.class
 hu\alkfejl\App.class
 hu\alkfejl\view\TableViewController.class
-hu\alkfejl\view\AddKerdoivDialog.class
-hu\alkfejl\view\WarningShower.class
+hu\alkfejl\view\dialogs\AddKerdesDialog.class
 hu\alkfejl\view\KerdesekTablazat.class
 hu\alkfejl\controller\Controller.class
+hu\alkfejl\view\dialogs\WarningShower.class
 hu\alkfejl\view\TableSetter.class
 hu\alkfejl\model\bean\Kerdoiv.class
 hu\alkfejl\controller\ControllerImpl.class
 hu\alkfejl\model\KerdesTipus.class
+hu\alkfejl\view\dialogs\AddKerdoivDialog.class
 hu\alkfejl\model\DAO.class
 hu\alkfejl\view\ButtonRow$1.class
 hu\alkfejl\view\ButtonRow.class

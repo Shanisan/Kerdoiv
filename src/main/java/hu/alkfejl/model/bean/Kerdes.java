@@ -1,5 +1,6 @@
 package hu.alkfejl.model.bean;
 
+import hu.alkfejl.model.KerdesTipus;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -23,6 +24,18 @@ public class Kerdes {
         this.setValaszokSzama(valaszokSzama);
         this.setKep(kep);
     }
+
+    public Kerdes(String szoveg, String tipus, int sorszam, String kep) {
+        this.setSzoveg(szoveg);
+        int i=0;
+        for (;i<KerdesTipus.tipusStringek.length;i++) {
+            if(tipus.equals(KerdesTipus.tipusStringek[i])){break;}
+        }
+        this.setTipus(i);
+        this.setSorszam(sorszam);
+        this.setKep(kep);
+    }
+
     //region getter-setter
 
     public int getKerdoivId() {return kerdoivId.get();}
