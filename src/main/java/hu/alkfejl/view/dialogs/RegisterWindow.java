@@ -62,11 +62,13 @@ public class RegisterWindow extends Stage {
             }
             //emdregion
             if(App.controller.addAdmin(usTF.getText(), emTF.getText(), AES.encrypt(pw2TF.getText()))){
-                WarningShower.showNotification("Regisztráció sikeres");
+                register.disarm();
+                back.disarm();
                 String msg = "Gratulálunk, sikeresen regisztrált a kérdőívek adminjaként!\n" +
                         "Felhasználónév: "+usTF.getText()+"\n" +
                         "Jelszó: "+pw2TF.getText();
                 EmailSender.sendEmail(emTF.getText(), "Sikeres regisztráció", msg);
+                WarningShower.showNotification("Regisztráció sikeres");
                 close();
             }else{
                 WarningShower.showWarning("Hiba történt");
