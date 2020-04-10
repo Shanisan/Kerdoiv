@@ -68,4 +68,9 @@ public class ControllerImpl implements Controller {
 
     @Override
     public List<Kerdes> getKerdes(int kerdoivID) {return dao.getKerdesek(kerdoivID);}
+
+    @Override
+    public int searchUser(String username, String password) {
+        return DAO_DB.searchUser(username, password);
+    }
 }

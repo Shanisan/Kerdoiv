@@ -3,6 +3,7 @@ package hu.alkfejl;
 import hu.alkfejl.controller.AES;
 import hu.alkfejl.controller.ControllerImpl;
 import hu.alkfejl.view.*;
+import hu.alkfejl.view.dialogs.LoginWindow;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.scene.Scene;
@@ -20,6 +21,8 @@ public class App extends Application {
     private static VBox root;
     private static Stage stage;
 
+    public static int adminID;
+
     public static void refreshTable(String title) {
         root.getChildren().clear();
         root.getChildren().addAll(buttons, TVC.getTable());
@@ -32,11 +35,14 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) {
+
         this.stage=stage;
+
         root=new VBox();
-        root.getChildren().addAll(buttons, TVC.getTable());
         stage.setTitle("Kérdőívek listája");
         scene = new Scene(root, 1280, 720);
+        LoginWindow lw = new LoginWindow(scene.getWindow());
+        root.getChildren().addAll(buttons, TVC.getTable());
         stage.setScene(scene);
         stage.show();
     }

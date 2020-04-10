@@ -13,6 +13,7 @@ public class AES {
 
     private static SecretKeySpec secretKey;
     private static byte[] key;
+    private static String secret = "AESisTheBestNotProbably";
 
     public static void setKey(String myKey)
     {
@@ -32,7 +33,7 @@ public class AES {
         }
     }
 
-    public static String encrypt(String strToEncrypt, String secret)
+    public static String encrypt(String strToEncrypt)
     {
         try
         {

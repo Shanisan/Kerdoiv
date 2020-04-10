@@ -14,6 +14,7 @@ public class DAO_DB implements DAO{
             "INSERT INTO Kerdoiv(nev) VALUES (?);";
     private static final String INSERT_KERDES =
             "INSERT INTO Kerdes(kerdoivID, szoveg, tipus, kep, sorszam) VALUES (?,?,?,?,?);";
+    private static final String SELECT_USER = "SELECT id FROM Adminok WHERE username=? AND password=?;";
 //region db_sql
     private static final String CREATE_DB =
             "BEGIN TRANSACTION;\n" +
@@ -50,6 +51,26 @@ public class DAO_DB implements DAO{
 
     public DAO_DB(){
         initTable();
+    }
+
+    public static int searchUser(String username, String password) {
+        List<Integer> userID = new ArrayList<>();
+        try(Connection conn = DriverManager.getConnection(DB_FILE);
+        PreparedStatement ps = conn.prepareStatement(SELECT_USER);){
+            ps.setString(1, username);
+            ps.setString(2, password);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                userID.add(rs.getInt(1));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        if(userID.size()==1){
+            return userID.get(0);
+        }else{
+            return -1;
+        }
     }
 
     private void initTable(){
@@ -127,13 +148,21 @@ public class DAO_DB implements DAO{
     public List<Kerdoiv> getKerdoiv() {
         List<Kerdoiv> list = new ArrayList<>();
         try(Connection conn = DriverManager.getConnection(DB_FILE); Statement st = conn.createStatement();){
-            ResultSet rs = st.executeQuery("SELECT Kerdoiv.id, Kerdoiv.nev, COUNT(Kerdes.id), COUNT(Kitoltes.id) FROM Kerdoiv LEFT JOIN Kerdes ON Kerdoiv.id=Kerdes.kerdoivID LEFT JOIN Kitoltes ON Kitoltes.kerdoivID=Kerdes.id GROUP BY Kerdoiv.id;");
+            ResultSet rs = st.executeQuery("SELECT Kerdoiv.id, Kerdoiv.nev, COUNT(Kerdes.id), COUNT(Kitoltes.id)," +
+                    " kezdesiIdo, befejezesiIdo, kitoltesiIdo, link, Adminok.username FROM Kerdoiv LEFT JOIN Kerdes ON Kerdoiv.id=Kerdes.kerdoivID " +
+                    "LEFT JOIN Kitoltes ON Kitoltes.kerdoivID=Kerdes.id " +
+                    "LEFT JOIN Adminok ON Adminok.id=Kerdoiv.letrehozoID GROUP BY Kerdoiv.id;");
             while(rs.next()){
                 Kerdoiv k = new Kerdoiv(
                         rs.getInt(1),
                         rs.getString(2),
                         rs.getInt(3),
-                        rs.getInt(4)
+                        rs.getInt(4),
+                        rs.getTimestamp(5),
+                        rs.getTimestamp(6),
+                        rs.getInt(7),
+                        rs.getString(8),
+                        rs.getString(9)
                 );
                 list.add(k);
             }

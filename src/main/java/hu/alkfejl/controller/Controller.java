@@ -10,4 +10,5 @@ public interface Controller {
     boolean addKerdes(Kerdes k);
     List<Kerdoiv> getKerdoiv();
     List<Kerdes> getKerdes(int kerdoivID);
+    int searchUser(String username, String password);
 }
