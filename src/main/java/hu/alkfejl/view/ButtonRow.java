@@ -3,11 +3,15 @@ package hu.alkfejl.view;
 import hu.alkfejl.App;
 import hu.alkfejl.controller.AES;
 import hu.alkfejl.controller.EmailSender;
+import hu.alkfejl.model.DriveConnection;
 import hu.alkfejl.view.dialogs.AddKerdesDialog;
 import hu.alkfejl.view.dialogs.AddKerdoivDialog;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
+
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 
 public class ButtonRow extends HBox {
     //kozos gombok
@@ -40,9 +44,15 @@ public class ButtonRow extends HBox {
         addKerdes.setOnAction(e -> {
             new AddKerdesDialog(App.controller, App.TVC.kerdoivID);
         });
-        /*test.setOnAction(e->{
-            EmailSender.sendEmail("thehellestdk@gmail.com", "Free Valorant keys 100% legit not a scam", "https://www.youtube.com/watch?v=cvh0nX08nRw");
-        });*/
+        test.setOnAction(e->{
+            try {
+                DriveConnection.accessGoogleDrive();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            } catch (GeneralSecurityException ex) {
+                ex.printStackTrace();
+            }
+        });
         switchButtonRow();
         this.setPadding(new Insets(5));
         this.setSpacing(5);
@@ -52,7 +62,7 @@ public class ButtonRow extends HBox {
         switch (App.TVC.getCurrentlyActiveTable()){
             case KERDOIV:
                 displayNone();
-                this.getChildren().addAll(addKerdoiv, kerdesek, kitoltesek);
+                this.getChildren().addAll(test, addKerdoiv, kerdesek, kitoltesek);
                 break;
             case KERDES:
                 displayNone();

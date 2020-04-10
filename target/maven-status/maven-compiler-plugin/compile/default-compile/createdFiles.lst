@@ -4,6 +4,7 @@ hu\alkfejl\view\tables\KerdoivekTablazat.class
 hu\alkfejl\App.class
 hu\alkfejl\controller\EmailSender.class
 hu\alkfejl\view\TableViewController.class
+hu\alkfejl\model\DriveConnection.class
 hu\alkfejl\view\tables\KerdesekTablazat.class
 hu\alkfejl\view\dialogs\AddKerdesDialog.class
 hu\alkfejl\controller\Controller.class
