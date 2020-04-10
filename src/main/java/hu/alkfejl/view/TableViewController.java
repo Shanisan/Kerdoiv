@@ -3,11 +3,13 @@ package hu.alkfejl.view;
 import hu.alkfejl.App;
 import hu.alkfejl.controller.ControllerImpl;
 import hu.alkfejl.model.bean.Kerdoiv;
+import hu.alkfejl.view.tables.KerdesekTablazat;
+import hu.alkfejl.view.tables.KerdoivekTablazat;
 import javafx.scene.control.TableView;
 
 public class TableViewController {
     private ControllerImpl controller;
-    private TableSetter currentlyActiveTable = TableSetter.KERDOIV;
+    private TableTypes currentlyActiveTable = TableTypes.KERDOIV;
     KerdoivekTablazat kivtable;
     KerdesekTablazat kstable;
     int kerdoivID;
@@ -21,9 +23,9 @@ public class TableViewController {
         kivtable=new KerdoivekTablazat(controller.getKerdoiv());
     }
 
-    public TableSetter getCurrentlyActiveTable() {return currentlyActiveTable;}
+    public TableTypes getCurrentlyActiveTable() {return currentlyActiveTable;}
 
-    public void setCurrentlyActiveTable(TableSetter currentlyActiveTable) {
+    public void setCurrentlyActiveTable(TableTypes currentlyActiveTable) {
         this.currentlyActiveTable = currentlyActiveTable;
         try {
             switch (currentlyActiveTable) {

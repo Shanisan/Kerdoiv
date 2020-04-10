@@ -1,4 +1,4 @@
-package hu.alkfejl.view;
+package hu.alkfejl.view.tables;
 
 import hu.alkfejl.model.bean.Kerdoiv;
 import javafx.collections.FXCollections;

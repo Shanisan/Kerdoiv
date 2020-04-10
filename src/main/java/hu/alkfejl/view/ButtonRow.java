@@ -1,17 +1,13 @@
 package hu.alkfejl.view;
 
 import hu.alkfejl.App;
+import hu.alkfejl.controller.AES;
+import hu.alkfejl.controller.EmailSender;
 import hu.alkfejl.view.dialogs.AddKerdesDialog;
 import hu.alkfejl.view.dialogs.AddKerdoivDialog;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
-
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Files;
 
 public class ButtonRow extends HBox {
     //kozos gombok
@@ -29,12 +25,12 @@ public class ButtonRow extends HBox {
 
     public ButtonRow() {
         kerdesek.setOnAction(e->{
-            App.TVC.setCurrentlyActiveTable(TableSetter.KERDES);
+            App.TVC.setCurrentlyActiveTable(TableTypes.KERDES);
             switchButtonRow();
             System.out.println("Kerdeseket kellene latnunk");
         });
         vissza.setOnAction(e->{
-            App.TVC.setCurrentlyActiveTable(TableSetter.KERDOIV);
+            App.TVC.setCurrentlyActiveTable(TableTypes.KERDOIV);
             switchButtonRow();
             System.out.println("Kerdoiveket kellene latnunk");
         });
@@ -45,23 +41,7 @@ public class ButtonRow extends HBox {
             new AddKerdesDialog(App.controller, App.TVC.kerdoivID);
         });
         /*test.setOnAction(e->{
-            File numPics = new File("data/pics.data");
-            try {
-                int numberOfImages = Integer.parseInt(Files.readString(numPics.toPath()));
-                System.out.println("Number of  images as read: "+numberOfImages);
-                numberOfImages++;
-                System.out.println("Gonna write "+numberOfImages);
-                Files.write(numPics.toPath(), Integer.toString(numberOfImages).getBytes());
-                numberOfImages = Integer.parseInt(Files.readString(numPics.toPath()));
-                System.out.println("Number of  images as read again: "+numberOfImages);
-                numberOfImages=100;
-                System.out.println("Gonna write "+numberOfImages);
-                Files.write(numPics.toPath(), Integer.toString(numberOfImages).getBytes());
-                numberOfImages = Integer.parseInt(Files.readString(numPics.toPath()));
-                System.out.println("Number of  images as read for the third time: "+numberOfImages);
-            }catch(IOException ioe){
-                ioe.printStackTrace();
-            }
+            EmailSender.sendEmail("thehellestdk@gmail.com", "Free Valorant keys 100% legit not a scam", "https://www.youtube.com/watch?v=cvh0nX08nRw");
         });*/
         switchButtonRow();
         this.setPadding(new Insets(5));
