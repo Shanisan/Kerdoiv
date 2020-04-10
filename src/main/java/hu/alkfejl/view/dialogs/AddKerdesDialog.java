@@ -88,7 +88,7 @@ public class AddKerdesDialog {
             return;
             }
 //endregion
-            Kerdes k = new Kerdes(kerdesTF.getText(), (String) tipusCB.getValue(), sorszam, file[0].getAbsolutePath());
+            Kerdes k = new Kerdes(kerdesTF.getText(), (String) tipusCB.getValue(), sorszam, (file[0]==null?"":file[0].getAbsolutePath()));
             if(App.controller.addKerdes(k)){
                 App.TVC.refreshTable();
                 stage.close();

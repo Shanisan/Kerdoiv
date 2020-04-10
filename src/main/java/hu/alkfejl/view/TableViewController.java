@@ -31,12 +31,14 @@ public class TableViewController {
                     App.refreshTable("Kérdőívek listája");
                     break;
                 case KERDES:
-                    Kerdoiv k = (Kerdoiv) kivtable.getSelectionModel().getSelectedItem();
-                    kerdoivID = k.getId();
-                    kstable = new KerdesekTablazat(controller.getKerdes(kerdoivID));
-                    App.refreshTable("A '"+k.getNev()+"' kérdőívhez kapcsolódó kérdések");
-                    System.out.println("Set the table to show questions from questionare " + k.getId());
-                    //this.currentlyActiveTable=TableSetter.KERDOIV;
+                    try{
+                        Kerdoiv k = (Kerdoiv) kivtable.getSelectionModel().getSelectedItem();
+                        kerdoivID = k.getId();
+                        kstable = new KerdesekTablazat(controller.getKerdes(kerdoivID));
+                        App.refreshTable("A '"+k.getNev()+"' kérdőívhez kapcsolódó kérdések");
+                        System.out.println("Set the table to show questions from questionare " + k.getId());
+                        //this.currentlyActiveTable=TableSetter.KERDOIV;
+                    }catch(NullPointerException npe){}
                     break;
                 case VALASZ:
                     break;

@@ -7,10 +7,16 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+
 public class ButtonRow extends HBox {
     //kozos gombok
+    Button test = new Button("Test");
     Button vissza = new Button("Vissza a kérdőívekhez");
-    Button frissites = new Button("Frissítés");
     //kedoives gombok
     Button addKerdoiv = new Button("Új kérdőív");
     Button kerdesek = new Button("Kérdések");
@@ -32,15 +38,31 @@ public class ButtonRow extends HBox {
             switchButtonRow();
             System.out.println("Kerdoiveket kellene latnunk");
         });
-        frissites.setOnAction(e->{
-            App.TVC.refreshTable();
-        });
         addKerdoiv.setOnAction(e -> {
             new AddKerdoivDialog(App.controller);
         });
         addKerdes.setOnAction(e -> {
             new AddKerdesDialog(App.controller, App.TVC.kerdoivID);
         });
+        /*test.setOnAction(e->{
+            File numPics = new File("data/pics.data");
+            try {
+                int numberOfImages = Integer.parseInt(Files.readString(numPics.toPath()));
+                System.out.println("Number of  images as read: "+numberOfImages);
+                numberOfImages++;
+                System.out.println("Gonna write "+numberOfImages);
+                Files.write(numPics.toPath(), Integer.toString(numberOfImages).getBytes());
+                numberOfImages = Integer.parseInt(Files.readString(numPics.toPath()));
+                System.out.println("Number of  images as read again: "+numberOfImages);
+                numberOfImages=100;
+                System.out.println("Gonna write "+numberOfImages);
+                Files.write(numPics.toPath(), Integer.toString(numberOfImages).getBytes());
+                numberOfImages = Integer.parseInt(Files.readString(numPics.toPath()));
+                System.out.println("Number of  images as read for the third time: "+numberOfImages);
+            }catch(IOException ioe){
+                ioe.printStackTrace();
+            }
+        });*/
         switchButtonRow();
         this.setPadding(new Insets(5));
         this.setSpacing(5);
@@ -50,11 +72,11 @@ public class ButtonRow extends HBox {
         switch (App.TVC.getCurrentlyActiveTable()){
             case KERDOIV:
                 displayNone();
-                this.getChildren().addAll(addKerdoiv, frissites, kerdesek, kitoltesek);
+                this.getChildren().addAll(addKerdoiv, kerdesek, kitoltesek);
                 break;
             case KERDES:
                 displayNone();
-                this.getChildren().addAll(vissza, addKerdes, frissites, valaszok);
+                this.getChildren().addAll(vissza, addKerdes, valaszok);
                 break;
             case VALASZ:
                 break;
