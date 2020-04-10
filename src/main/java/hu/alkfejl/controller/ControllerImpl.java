@@ -70,7 +70,15 @@ public class ControllerImpl implements Controller {
     public List<Kerdes> getKerdes(int kerdoivID) {return dao.getKerdesek(kerdoivID);}
 
     @Override
-    public int searchUser(String username, String password) {
-        return DAO_DB.searchUser(username, password);
+    public int searchUser(String username, String password) {return DAO_DB.searchUser(username, password);}
+
+    @Override
+    public List<String> getAdminList() {return dao.getAdminList();}
+
+    @Override
+    public boolean addAdmin(String u, String e, String p) {
+        return dao.addAdmin(u,e,p);
     }
+
+
 }

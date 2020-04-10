@@ -15,6 +15,7 @@ public class DAO_DB implements DAO{
     private static final String INSERT_KERDES =
             "INSERT INTO Kerdes(kerdoivID, szoveg, tipus, kep, sorszam) VALUES (?,?,?,?,?);";
     private static final String SELECT_USER = "SELECT id FROM Adminok WHERE username=? AND password=?;";
+    private static final String INSERT_ADMIN = "INSERT INTO Adminok(username, email, password) VALUES (?,?,?)";
 //region db_sql
     private static final String CREATE_DB =
             "BEGIN TRANSACTION;\n" +
@@ -171,5 +172,34 @@ public class DAO_DB implements DAO{
         }
 
         return list;
+    }
+
+    public List<String> getAdminList(){
+        List<String> admins = new ArrayList<>();
+        try(Connection conn = DriverManager.getConnection(DB_FILE); Statement st = conn.createStatement();){
+            ResultSet rs = st.executeQuery("SELECT username FROM Adminok;");
+            while(rs.next()){
+                    admins.add(rs.getString(1));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return admins;
+    }
+
+    public boolean addAdmin(String username, String email, String password){
+        try(Connection conn = DriverManager.getConnection(DB_FILE);
+            PreparedStatement ps = conn.prepareStatement(INSERT_ADMIN);){
+            ps.setString(1, username);
+            ps.setString(2, email);
+            ps.setString(3, password);
+            int res = ps.executeUpdate();
+            if(res==1){
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

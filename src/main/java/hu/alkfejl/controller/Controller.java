@@ -11,4 +11,6 @@ public interface Controller {
     List<Kerdoiv> getKerdoiv();
     List<Kerdes> getKerdes(int kerdoivID);
     int searchUser(String username, String password);
+    public List<String> getAdminList();
+    public boolean addAdmin(String u, String e, String p);
 }

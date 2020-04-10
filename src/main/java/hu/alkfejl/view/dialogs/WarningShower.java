@@ -10,4 +10,10 @@ public class WarningShower {
         alert.setTitle("Hiba");
         alert.showAndWait();
     }
+    public static void showNotification(String message){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setContentText(message);
+        alert.setHeaderText(null);
+        alert.showAndWait();
+    }
 }

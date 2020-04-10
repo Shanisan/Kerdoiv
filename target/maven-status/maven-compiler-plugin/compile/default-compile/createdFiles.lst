@@ -15,6 +15,7 @@ hu\alkfejl\view\tables\KerdesekTablazat.class
 hu\alkfejl\view\dialogs\AddKerdesDialog.class
 hu\alkfejl\controller\Controller.class
 hu\alkfejl\controller\AES.class
+hu\alkfejl\view\dialogs\RegisterWindow.class
 hu\alkfejl\model\bean\Kerdoiv.class
 hu\alkfejl\model\KerdesTipus.class
 hu\alkfejl\model\bean\Valasz.class
