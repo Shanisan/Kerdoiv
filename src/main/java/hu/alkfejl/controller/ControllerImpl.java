@@ -6,8 +6,6 @@ import hu.alkfejl.model.bean.Kerdes;
 import hu.alkfejl.model.bean.Kerdoiv;
 
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -64,10 +62,20 @@ public class ControllerImpl implements Controller {
     //endregion
 
     @Override
-    public List<Kerdoiv> getKerdoiv(int adminID) {return dao.getKerdoiv(adminID);}
+    public List<Kerdoiv> getKerdoivList(int adminID) {return dao.getKerdoivList(adminID);}
 
     @Override
-    public List<Kerdes> getKerdes(int kerdoivID) {return dao.getKerdesek(kerdoivID);}
+    public List<Kerdes> getKerdesList(int kerdoivID) {return dao.getKerdesekList(kerdoivID);}
+
+    @Override
+    public Kerdoiv getKerdoiv(int kerdoivID) {
+        return dao.getKerdoiv(kerdoivID);
+    }
+
+    @Override
+    public Kerdes getKerdes(int kerdesID) {
+        return null;
+    }
 
     @Override
     public int searchUser(String username, String password) {return DAO_DB.searchUser(username, password);}
@@ -80,6 +88,12 @@ public class ControllerImpl implements Controller {
 
     @Override
     public boolean deleteRow(String typeToDelete, int id) {return dao.deleteRow(typeToDelete, id);}
+
+    @Override
+    public boolean editKerdoiv(Kerdoiv k) {
+        System.out.println("Controllerben: "+k.toString());
+        return dao.editKerdoiv(k);
+    }
 
 
 }

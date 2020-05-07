@@ -2,6 +2,7 @@ package hu.alkfejl.model;
 
 import hu.alkfejl.model.bean.Kerdes;
 import hu.alkfejl.model.bean.Kerdoiv;
+import hu.alkfejl.view.dialogs.WarningShower;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -126,7 +127,7 @@ public class DAO_DB implements DAO{
     }
 
     @Override
-    public List<Kerdes> getKerdesek(int kerdoivID) {
+    public List<Kerdes> getKerdesekList(int kerdoivID) {
         List<Kerdes> list = new ArrayList<>();
         try(Connection conn = DriverManager.getConnection(DB_FILE); Statement st = conn.createStatement();){
             ResultSet rs = st.executeQuery("SELECT Kerdes.id, Kerdes.szoveg, Kerdes.kerdoivID, Kerdes.tipus, Kerdes.sorszam, Kerdes.kep, \n" +
@@ -150,7 +151,7 @@ public class DAO_DB implements DAO{
     }
 
     @Override
-    public List<Kerdoiv> getKerdoiv(int adminID) {
+    public List<Kerdoiv> getKerdoivList(int adminID) {
         List<Kerdoiv> list = new ArrayList<>();
         try(Connection conn = DriverManager.getConnection(DB_FILE); Statement st = conn.createStatement();){
             ResultSet rs = st.executeQuery("SELECT Kerdoiv.id, Kerdoiv.nev, COUNT(Kerdes.id), COUNT(Kitoltes.id)," +
@@ -183,6 +184,28 @@ public class DAO_DB implements DAO{
     }
 
     @Override
+    public Kerdes getKerdes(int kerdesID) {
+        return null;
+    }
+
+    @Override
+    public Kerdoiv getKerdoiv(int kerdoivID) {
+        Kerdoiv k = null;
+        try(Connection conn = DriverManager.getConnection(DB_FILE); Statement st = conn.createStatement();){
+            ResultSet rs = st.executeQuery("SELECT nev, kezdesiIdo, befejezesiIdo, kitoltesiIdo FROM Kerdoiv where id="+kerdoivID);
+            while(rs.next()){
+                k=new Kerdoiv(rs.getString(1));
+                k.setKezdet(rs.getTimestamp(2));
+                k.setVege(rs.getTimestamp(3));
+                k.setIdo(rs.getInt(4));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return k;
+    }
+
+    @Override
     public boolean deleteRow(String typeToDelete, int id) {
         try(Connection conn = DriverManager.getConnection(DB_FILE); Statement st = conn.createStatement();){
             conn.setAutoCommit(false);
@@ -199,7 +222,38 @@ public class DAO_DB implements DAO{
         return false;
     }
 
-    public List<String> getAdminList(){
+    @Override
+    public boolean editKerdoiv(Kerdoiv k) {
+        try (Connection conn = DriverManager.getConnection(DB_FILE); PreparedStatement st = conn.prepareStatement(
+                "UPDATE Kerdoiv SET nev=?, kezdesiIdo=?, befejezesiIdo=?, kitoltesiIdo=? WHERE id=?;"
+        );) {
+            conn.setAutoCommit(false);
+            st.setString(1, k.getNev());
+            st.setTimestamp(2, k.getKezdet());
+            st.setTimestamp(3, k.getVege());
+            st.setInt(4, k.getIdo());
+            st.setInt(5, k.getId());
+            System.out.println("nev - "+k.getNev());
+            System.out.println("kezdet - "+k.getKezdet().toString());
+            System.out.println("vege - "+k.getVege().toString());
+            System.out.println("ido - "+k.getIdo());
+            System.out.println("ID - "+k.getId());
+            try{
+                st.execute();
+            }catch (SQLException sqlE){
+                sqlE.printStackTrace();
+                conn.rollback();
+                return false;
+            }
+            conn.commit();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+        public List<String> getAdminList(){
         List<String> admins = new ArrayList<>();
         try(Connection conn = DriverManager.getConnection(DB_FILE); Statement st = conn.createStatement();){
             ResultSet rs = st.executeQuery("SELECT username FROM Adminok;");

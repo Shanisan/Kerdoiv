@@ -109,12 +109,20 @@ public class Kerdoiv implements DatabaseObject {
         this.nev.set(nev);
     }
     //endregion
+
+
     @Override
     public String toString() {
         return "Kerdoiv{" +
                 "id=" + id +
                 ", nev=" + nev +
-                ", kerdesek szama=" + kerdesekSzama +
+                ", kitoltesek=" + kitoltesek +
+                ", kezdet=" + kezdet +
+                ", vege=" + vege +
+                ", ido=" + ido +
+                ", letrehozo=" + letrehozo +
+                ", link=" + link +
+                ", kerdesekSzama=" + kerdesekSzama +
                 '}';
     }
 

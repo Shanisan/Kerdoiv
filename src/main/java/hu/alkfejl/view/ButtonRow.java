@@ -8,6 +8,7 @@ import hu.alkfejl.model.bean.DatabaseObject;
 import hu.alkfejl.model.bean.Kerdoiv;
 import hu.alkfejl.view.dialogs.AddKerdesDialog;
 import hu.alkfejl.view.dialogs.AddKerdoivDialog;
+import hu.alkfejl.view.dialogs.EditKerdoivDialog;
 import hu.alkfejl.view.dialogs.WarningShower;
 import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
@@ -65,9 +66,21 @@ public class ButtonRow extends HBox {
                 }catch (NullPointerException npe){}
                 if(id!=-1){
                     App.controller.deleteRow(type, id);
+                    App.TVC.refreshTable();
                 }else{
                     WarningShower.showWarning("Nincs kijelölt elem!");
                 }
+            }
+        });
+        szerkeszt.setOnAction(e->{
+            int id = -1;
+            try {
+                id=((DatabaseObject)App.TVC.getTable().getSelectionModel().getSelectedItem()).getId();
+            }catch (NullPointerException npe){}
+            if(id!=-1){
+                new EditKerdoivDialog(App.controller, id);
+            }else{
+                WarningShower.showWarning("Nincs kijelölt elem!");
             }
         });
         /*test.setOnAction(e->{

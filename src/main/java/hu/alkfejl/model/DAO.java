@@ -7,8 +7,11 @@ import java.util.List;
 
 public interface DAO {
     boolean addKerdoiv(Kerdoiv k);
-    List<Kerdes> getKerdesek(int kerdoivID);
     boolean addKerdes(Kerdes k);
-    List<Kerdoiv> getKerdoiv(int adminID);
+    List<Kerdes> getKerdesekList(int kerdoivID);
+    List<Kerdoiv> getKerdoivList(int adminID);
+    Kerdes getKerdes(int kerdesID);
+    Kerdoiv getKerdoiv(int kerdoivID);
     boolean deleteRow(String typeToDelete, int id);
+    boolean editKerdoiv(Kerdoiv k);
 }

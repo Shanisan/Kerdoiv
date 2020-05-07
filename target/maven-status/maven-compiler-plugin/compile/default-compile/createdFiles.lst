@@ -1,4 +1,5 @@
 hu\alkfejl\view\TableViewController.class
+hu\alkfejl\view\dialogs\EditKerdoivDialog.class
 hu\alkfejl\view\dialogs\WarningShower.class
 hu\alkfejl\controller\ControllerImpl.class
 hu\alkfejl\view\dialogs\LoginWindow.class

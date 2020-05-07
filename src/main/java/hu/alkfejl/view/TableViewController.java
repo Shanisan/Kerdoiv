@@ -20,7 +20,7 @@ public class TableViewController {
     }
 
     public void setKerdoivTablazat(){
-        kivtable=new KerdoivekTablazat(controller.getKerdoiv(App.adminID));
+        kivtable=new KerdoivekTablazat(controller.getKerdoivList(App.adminID));
     }
 
     public TableTypes getCurrentlyActiveTable() {return currentlyActiveTable;}
@@ -36,7 +36,7 @@ public class TableViewController {
                     try{
                         Kerdoiv k = (Kerdoiv) kivtable.getSelectionModel().getSelectedItem();
                         kerdoivID = k.getId();
-                        kstable = new KerdesekTablazat(controller.getKerdes(kerdoivID));
+                        kstable = new KerdesekTablazat(controller.getKerdesList(kerdoivID));
                         App.refreshTable("A '"+k.getNev()+"' kérdőívhez kapcsolódó kérdések");
                         System.out.println("Set the table to show questions from questionare " + k.getId());
                         //this.currentlyActiveTable=TableSetter.KERDOIV;
@@ -56,10 +56,10 @@ public class TableViewController {
         try {
             switch (currentlyActiveTable) {
                 case KERDOIV:
-                    kivtable.refresh(App.controller.getKerdoiv(App.adminID));
+                    kivtable.refresh(App.controller.getKerdoivList(App.adminID));
                     break;
                 case KERDES:
-                    kstable.refresh(App.controller.getKerdes(kerdoivID));
+                    kstable.refresh(App.controller.getKerdesList(kerdoivID));
                     break;
                 case VALASZ:
                     break;

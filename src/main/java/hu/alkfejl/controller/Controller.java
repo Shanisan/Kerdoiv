@@ -8,10 +8,13 @@ import java.util.List;
 public interface Controller {
     boolean addKerdoiv(Kerdoiv k);
     boolean addKerdes(Kerdes k);
-    List<Kerdoiv> getKerdoiv(int adminID);
-    List<Kerdes> getKerdes(int kerdoivID);
+    List<Kerdoiv> getKerdoivList(int adminID);
+    List<Kerdes> getKerdesList(int kerdoivID);
+    Kerdoiv getKerdoiv(int kerdoivID);
+    Kerdes getKerdes(int kerdesID);
     int searchUser(String username, String password);
     public List<String> getAdminList();
     public boolean addAdmin(String u, String e, String p);
     public boolean deleteRow(String typeToDelete, int id);
+    boolean editKerdoiv(Kerdoiv k);
 }
