@@ -11,7 +11,7 @@ public class DAO_DB implements DAO{
     private static final String DB_FILE = "jdbc:sqlite:kerdoiv.db";
 
     private static final String INSERT_KERDOIV =
-            "INSERT INTO Kerdoiv(nev) VALUES (?);";
+            "INSERT INTO Kerdoiv(nev, kezdesiIdo, befejezesiIdo, kitoltesiIdo, letrehozoID) VALUES (?, ?, ?, ?, ?);";
     private static final String INSERT_KERDES =
             "INSERT INTO Kerdes(kerdoivID, szoveg, tipus, kep, sorszam) VALUES (?,?,?,?,?);";
     private static final String SELECT_USER = "SELECT id FROM Adminok WHERE username=? AND password=?;";
@@ -88,6 +88,10 @@ public class DAO_DB implements DAO{
         try(Connection conn = DriverManager.getConnection(DB_FILE);
             PreparedStatement ps = conn.prepareStatement(INSERT_KERDOIV);){
             ps.setString(1, k.getNev());
+            ps.setString(2, k.getKezdet().toString());
+            ps.setString(3, k.getVege().toString());
+            ps.setInt(4, k.getIdo());
+            ps.setString(5, k.getLetrehozo());
             int res = ps.executeUpdate();
             if(res==1){
                 return true;

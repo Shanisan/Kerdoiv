@@ -11,6 +11,8 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import tornadofx.control.DateTimePicker;
 
+import java.sql.Timestamp;
+
 public class AddKerdoivDialog {
 
     public AddKerdoivDialog(Controller controller) {createDialog(controller);}
@@ -49,7 +51,15 @@ public class AddKerdoivDialog {
                 return;
             }
             Kerdoiv k = new Kerdoiv(nameTF.getText());
-
+            try {
+                k.setIdo(Integer.parseInt(idoTF.getText()));
+            } catch (NumberFormatException ex) {
+                ex.printStackTrace();
+                WarningShower.showWarning("A kitöltési idő csak számot tartalmazhat");
+            }
+            k.setLetrehozo(Integer.toString(App.adminID));
+            k.setKezdet(Timestamp.valueOf(kezdetDTP.getDateTimeValue()));
+            k.setVege(Timestamp.valueOf(vegeDTP.getDateTimeValue()));
             if(c.addKerdoiv(k)){
                 App.TVC.refreshTable();
                 stage.close();
