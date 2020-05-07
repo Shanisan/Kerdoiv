@@ -71,6 +71,20 @@ public class TableViewController {
         }
     }
 
+    public boolean editElement(){
+        switch (currentlyActiveTable){
+            case KERDOIV:
+                break;
+            case KERDES:
+                break;
+            case VALASZ:
+                break;
+            case VALASZADAS:
+                break;
+        }
+        return false;
+    }
+
     public TableView getTable() {
         switch (currentlyActiveTable) {
             case KERDOIV:

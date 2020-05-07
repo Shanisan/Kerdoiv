@@ -15,9 +15,16 @@ public class Kerdoiv {
     private Timestamp kezdet;
     private Timestamp vege;
     private IntegerProperty ido = new SimpleIntegerProperty();
-    private StringProperty link = new SimpleStringProperty();
     private StringProperty letrehozo = new SimpleStringProperty();
+    private StringProperty link = new SimpleStringProperty();
 //region getter-setter
+
+    public String getLink() {return link.get();}
+
+    public StringProperty linkProperty() {return link;}
+
+    public void setLink(String link) {this.link.set(link);}
+
     public int getKitoltesek() {return kitoltesek.get();}
 
     public Timestamp getKezdet() {
@@ -46,18 +53,6 @@ public class Kerdoiv {
 
     public void setIdo(int ido) {
         this.ido.set(ido);
-    }
-
-    public String getLink() {
-        return link.get();
-    }
-
-    public StringProperty linkProperty() {
-        return link;
-    }
-
-    public void setLink(String link) {
-        this.link.set(link);
     }
 
     public String getLetrehozo() {
@@ -136,7 +131,6 @@ public class Kerdoiv {
         this.setNev(nev);
         this.setKerdesekSzama(kerdesekSzama);
         this.setKitoltesek(kitoltesek);
-        this.setLink(link);
         this.setIdo(ido);
         this.setKezdet(kezdet);
         this.setVege(vege);

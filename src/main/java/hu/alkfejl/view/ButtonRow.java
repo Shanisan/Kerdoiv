@@ -17,6 +17,8 @@ public class ButtonRow extends HBox {
     //kozos gombok
     Button test = new Button("Test");
     Button vissza = new Button("Vissza a kérdőívekhez");
+    Button szerkeszt = new Button("Szerkesztés");
+    Button torol = new Button("Törlés");
     //kedoives gombok
     Button addKerdoiv = new Button("Új kérdőív");
     Button kerdesek = new Button("Kérdések");
@@ -44,7 +46,7 @@ public class ButtonRow extends HBox {
         addKerdes.setOnAction(e -> {
             new AddKerdesDialog(App.controller, App.TVC.kerdoivID);
         });
-        test.setOnAction(e->{
+        /*test.setOnAction(e->{
             try {
                 DriveConnection.accessGoogleDrive();
             } catch (IOException ex) {
@@ -52,7 +54,7 @@ public class ButtonRow extends HBox {
             } catch (GeneralSecurityException ex) {
                 ex.printStackTrace();
             }
-        });
+        });*/
         switchButtonRow();
         this.setPadding(new Insets(5));
         this.setSpacing(5);
@@ -62,11 +64,11 @@ public class ButtonRow extends HBox {
         switch (App.TVC.getCurrentlyActiveTable()){
             case KERDOIV:
                 displayNone();
-                this.getChildren().addAll(test, addKerdoiv, kerdesek, kitoltesek);
+                this.getChildren().addAll(addKerdoiv, szerkeszt, torol, kerdesek, kitoltesek);
                 break;
             case KERDES:
                 displayNone();
-                this.getChildren().addAll(vissza, addKerdes, valaszok);
+                this.getChildren().addAll(vissza, addKerdes, szerkeszt, torol, valaszok);
                 break;
             case VALASZ:
                 break;

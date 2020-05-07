@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import tornadofx.control.DateTimePicker;
 
 public class AddKerdoivDialog {
 
@@ -19,9 +20,21 @@ public class AddKerdoivDialog {
         GridPane pane = new GridPane();
 
         TextField nameTF = new TextField();
+        TextField idoTF = new TextField();
+        DateTimePicker kezdetDTP = new DateTimePicker();
+        DateTimePicker vegeDTP = new DateTimePicker();
 
         pane.add(new Label("Név"), 0, 0);
         pane.add(nameTF, 1, 0);
+
+        pane.add(new Label("Kitöltés kezdete"), 0, 1);
+        pane.add(kezdetDTP, 1, 1);
+
+        pane.add(new Label("Kitöltés vége"), 0, 2);
+        pane.add(vegeDTP, 1, 2);
+
+        pane.add(new Label("Kitöltésre szánt idő"), 0, 3);
+        pane.add(idoTF, 1, 3);
 
         Button cancel = new Button("Cancel");
         cancel.setOnAction(e -> {
@@ -46,10 +59,10 @@ public class AddKerdoivDialog {
             }
         });
 
-        pane.add(cancel, 0, 1);
-        pane.add(ok, 1, 1);
+        pane.add(cancel, 0, 4);
+        pane.add(ok, 1, 4);
 
-        Scene scene = new Scene(pane, 200, 200);
+        Scene scene = new Scene(pane, 300, 500);
         stage.setScene(scene);
 
         stage.show();

@@ -13,6 +13,9 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class App extends Application {
     public static ControllerImpl controller = new ControllerImpl();
     public static TableViewController TVC = new TableViewController(controller);
@@ -20,7 +23,6 @@ public class App extends Application {
     private static Scene scene;
     private static VBox root;
     private static Stage stage;
-
     public static int adminID;
 
     public static void refreshTable(String title) {
@@ -41,7 +43,12 @@ public class App extends Application {
         root=new VBox();
         stage.setTitle("Kérdőívek listája");
         scene = new Scene(root, 1280, 720);
-        LoginWindow lw = new LoginWindow(scene.getWindow());
+        boolean autoLogIn = true;
+        if(!autoLogIn){
+            LoginWindow lw = new LoginWindow(scene.getWindow());
+        }else{
+            adminID=1;
+        }
         root.getChildren().addAll(buttons, TVC.getTable());
         stage.setScene(scene);
         stage.show();
