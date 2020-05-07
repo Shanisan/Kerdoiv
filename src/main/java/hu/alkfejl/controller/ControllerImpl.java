@@ -64,7 +64,7 @@ public class ControllerImpl implements Controller {
     //endregion
 
     @Override
-    public List<Kerdoiv> getKerdoiv() {return dao.getKerdoiv();}
+    public List<Kerdoiv> getKerdoiv(int adminID) {return dao.getKerdoiv(adminID);}
 
     @Override
     public List<Kerdes> getKerdes(int kerdoivID) {return dao.getKerdesek(kerdoivID);}
@@ -76,9 +76,10 @@ public class ControllerImpl implements Controller {
     public List<String> getAdminList() {return dao.getAdminList();}
 
     @Override
-    public boolean addAdmin(String u, String e, String p) {
-        return dao.addAdmin(u,e,p);
-    }
+    public boolean addAdmin(String u, String e, String p) {return dao.addAdmin(u,e,p);}
+
+    @Override
+    public boolean deleteRow(String typeToDelete, int id) {return dao.deleteRow(typeToDelete, id);}
 
 
 }

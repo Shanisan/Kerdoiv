@@ -18,8 +18,8 @@ import java.util.List;
 
 public class App extends Application {
     public static ControllerImpl controller = new ControllerImpl();
-    public static TableViewController TVC = new TableViewController(controller);
-    private static ButtonRow buttons = new ButtonRow();
+    public static TableViewController TVC;
+    private static ButtonRow buttons;
     private static Scene scene;
     private static VBox root;
     private static Stage stage;
@@ -49,6 +49,8 @@ public class App extends Application {
         }else{
             adminID=1;
         }
+        TVC = new TableViewController(controller);
+        buttons = new ButtonRow();
         root.getChildren().addAll(buttons, TVC.getTable());
         stage.setScene(scene);
         stage.show();

@@ -20,7 +20,7 @@ public class TableViewController {
     }
 
     public void setKerdoivTablazat(){
-        kivtable=new KerdoivekTablazat(controller.getKerdoiv());
+        kivtable=new KerdoivekTablazat(controller.getKerdoiv(App.adminID));
     }
 
     public TableTypes getCurrentlyActiveTable() {return currentlyActiveTable;}
@@ -56,7 +56,7 @@ public class TableViewController {
         try {
             switch (currentlyActiveTable) {
                 case KERDOIV:
-                    kivtable.refresh(App.controller.getKerdoiv());
+                    kivtable.refresh(App.controller.getKerdoiv(App.adminID));
                     break;
                 case KERDES:
                     kstable.refresh(App.controller.getKerdes(kerdoivID));

@@ -8,7 +8,7 @@ import javafx.beans.property.StringProperty;
 import java.sql.Time;
 import java.sql.Timestamp;
 
-public class Kerdoiv {
+public class Kerdoiv implements DatabaseObject {
     private IntegerProperty id = new SimpleIntegerProperty();
     private StringProperty nev = new SimpleStringProperty();
     private IntegerProperty kitoltesek = new SimpleIntegerProperty();

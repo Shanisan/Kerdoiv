@@ -23,7 +23,7 @@ public class KerdoivekTablazat extends TableView{
         TableColumn<Kerdoiv, Integer> col_kerdesek = new TableColumn("Kérdések száma");
         TableColumn<Kerdoiv, Integer> col_kitoltesek = new TableColumn("Kitöltések száma");
         TableColumn<Kerdoiv, String> col_kezdet = new TableColumn("Kitöltés kezdete");
-        TableColumn<Kerdoiv, Timestamp> col_vege = new TableColumn("Kitöltés vége");
+        TableColumn<Kerdoiv, String> col_vege = new TableColumn("Kitöltés vége");
         TableColumn<Kerdoiv, Integer> col_ido = new TableColumn("Kitöltés ideje (perc)");
         TableColumn<Kerdoiv, String> col_link = new TableColumn("Link");
         TableColumn<Kerdoiv, String> col_letrehozta = new TableColumn("Létrehozta");
@@ -41,6 +41,10 @@ public class KerdoivekTablazat extends TableView{
             return new ReadOnlyStringWrapper(df.format(data.getValue().getKezdet()));
         });
         col_kezdet.setCellValueFactory(data->{
+            SimpleDateFormat df = new SimpleDateFormat("yyyy.MM.dd hh:mm");
+            return new ReadOnlyStringWrapper(df.format(data.getValue().getKezdet()));
+        });
+        col_vege.setCellValueFactory(data->{
             SimpleDateFormat df = new SimpleDateFormat("yyyy.MM.dd hh:mm");
             return new ReadOnlyStringWrapper(df.format(data.getValue().getVege()));
         });

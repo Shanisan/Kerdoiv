@@ -9,5 +9,6 @@ public interface DAO {
     boolean addKerdoiv(Kerdoiv k);
     List<Kerdes> getKerdesek(int kerdoivID);
     boolean addKerdes(Kerdes k);
-    List<Kerdoiv> getKerdoiv();
+    List<Kerdoiv> getKerdoiv(int adminID);
+    boolean deleteRow(String typeToDelete, int id);
 }

@@ -146,13 +146,17 @@ public class DAO_DB implements DAO{
     }
 
     @Override
-    public List<Kerdoiv> getKerdoiv() {
+    public List<Kerdoiv> getKerdoiv(int adminID) {
         List<Kerdoiv> list = new ArrayList<>();
         try(Connection conn = DriverManager.getConnection(DB_FILE); Statement st = conn.createStatement();){
             ResultSet rs = st.executeQuery("SELECT Kerdoiv.id, Kerdoiv.nev, COUNT(Kerdes.id), COUNT(Kitoltes.id)," +
                     " kezdesiIdo, befejezesiIdo, kitoltesiIdo, link, Adminok.username FROM Kerdoiv LEFT JOIN Kerdes ON Kerdoiv.id=Kerdes.kerdoivID " +
-                    "LEFT JOIN Kitoltes ON Kitoltes.kerdoivID=Kerdes.id " +
-                    "LEFT JOIN Adminok ON Adminok.id=Kerdoiv.letrehozoID GROUP BY Kerdoiv.id;");
+                    "LEFT JOIN Kitoltes ON Kitoltes.kerdoivID=Kerdes.id LEFT JOIN Adminok ON Adminok.id=Kerdoiv.letrehozoID " +
+                    "WHERE Kerdoiv.letrehozoID="+adminID+" GROUP BY Kerdoiv.id;");
+            System.out.println("SELECT Kerdoiv.id, Kerdoiv.nev, COUNT(Kerdes.id), COUNT(Kitoltes.id)," +
+                    " kezdesiIdo, befejezesiIdo, kitoltesiIdo, link, Adminok.username FROM Kerdoiv LEFT JOIN Kerdes ON Kerdoiv.id=Kerdes.kerdoivID " +
+                    "LEFT JOIN Kitoltes ON Kitoltes.kerdoivID=Kerdes.id LEFT JOIN Adminok ON Adminok.id=Kerdoiv.letrehozoID " +
+                    "WHERE Kerdoiv.letrehozoID="+adminID+" GROUP BY Kerdoiv.id;");
             while(rs.next()){
                 Kerdoiv k = new Kerdoiv(
                         rs.getInt(1),
@@ -172,6 +176,23 @@ public class DAO_DB implements DAO{
         }
 
         return list;
+    }
+
+    @Override
+    public boolean deleteRow(String typeToDelete, int id) {
+        try(Connection conn = DriverManager.getConnection(DB_FILE); Statement st = conn.createStatement();){
+            conn.setAutoCommit(false);
+            try{
+                st.execute("DELETE FROM "+typeToDelete+" WHERE ID="+id);
+                conn.commit();
+                return true;
+            } catch (SQLException e) {
+                conn.rollback();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     public List<String> getAdminList(){

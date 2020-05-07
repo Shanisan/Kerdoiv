@@ -6,7 +6,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class Kerdes {
+public class Kerdes implements DatabaseObject{
     private StringProperty szoveg = new SimpleStringProperty();
     private IntegerProperty tipus = new SimpleIntegerProperty();
     private IntegerProperty id = new SimpleIntegerProperty();

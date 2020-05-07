@@ -5,7 +5,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class Valasz {
+public class Valasz implements DatabaseObject {
     private IntegerProperty id = new SimpleIntegerProperty();
     private IntegerProperty kerdesID = new SimpleIntegerProperty();
     private StringProperty szoveg = new SimpleStringProperty();
