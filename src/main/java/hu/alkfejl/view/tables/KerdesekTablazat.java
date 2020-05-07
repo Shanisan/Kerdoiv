@@ -1,8 +1,7 @@
 package hu.alkfejl.view.tables;
 
-import hu.alkfejl.model.KerdesTipus;
+import hu.alkfejl.model.bean.KerdesTipus;
 import hu.alkfejl.model.bean.Kerdes;
-import hu.alkfejl.model.bean.Kerdoiv;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.scene.control.TableColumn;

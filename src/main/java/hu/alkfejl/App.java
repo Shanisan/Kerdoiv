@@ -6,6 +6,7 @@ import hu.alkfejl.view.*;
 import hu.alkfejl.view.dialogs.LoginWindow;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
@@ -29,6 +30,18 @@ public class App extends Application {
         root.getChildren().clear();
         root.getChildren().addAll(buttons, TVC.getTable());
         setTitle(title);
+    }
+
+    public static void lockdown(){
+        for (Node n:root.getChildren()) {
+            n.setDisable(true);
+        }
+    }
+
+    public static void release(){
+        for (Node n:root.getChildren()) {
+            n.setDisable(false);
+        }
     }
 
     private static void setTitle(String title){

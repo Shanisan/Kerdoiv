@@ -1,4 +1,4 @@
-package hu.alkfejl.model;
+package hu.alkfejl.model.bean;
 
 public enum KerdesTipus {
     TEXT, SINGLE_CHOICE, MULTIPLE_CHOICE, DATE, INTEGER;

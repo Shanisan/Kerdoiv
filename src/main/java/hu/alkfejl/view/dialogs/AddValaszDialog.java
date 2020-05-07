@@ -2,8 +2,8 @@ package hu.alkfejl.view.dialogs;
 
 import hu.alkfejl.App;
 import hu.alkfejl.controller.Controller;
-import hu.alkfejl.model.bean.KerdesTipus;
 import hu.alkfejl.model.bean.Kerdes;
+import hu.alkfejl.model.bean.KerdesTipus;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
@@ -17,9 +17,9 @@ import javafx.stage.Stage;
 
 import java.io.File;
 
-public class AddKerdesDialog {
+public class AddValaszDialog {
 
-    public AddKerdesDialog(Controller controller, int kerdoivID) {createDialog(controller, kerdoivID);}
+    public AddValaszDialog(Controller controller, int kerdoivID) {createDialog(controller, kerdoivID);}
 
     private void createDialog(Controller c, int kerdoivID) {
         Stage stage = new Stage();

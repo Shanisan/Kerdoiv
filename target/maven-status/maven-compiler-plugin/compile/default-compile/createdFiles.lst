@@ -4,6 +4,7 @@ hu\alkfejl\view\dialogs\WarningShower.class
 hu\alkfejl\controller\ControllerImpl.class
 hu\alkfejl\view\dialogs\LoginWindow.class
 hu\alkfejl\view\dialogs\AddKerdoivDialog.class
+hu\alkfejl\model\bean\KerdesTipus.class
 hu\alkfejl\view\ButtonRow$1.class
 hu\alkfejl\view\ButtonRow.class
 hu\alkfejl\model\bean\Kerdes.class
@@ -14,15 +15,17 @@ hu\alkfejl\controller\EmailSender.class
 hu\alkfejl\model\bean\DatabaseObject.class
 hu\alkfejl\model\DriveConnection.class
 hu\alkfejl\view\tables\KerdesekTablazat.class
+hu\alkfejl\view\dialogs\AddValaszDialog.class
+hu\alkfejl\controller\ControllerImpl$Deleter.class
 hu\alkfejl\view\dialogs\AddKerdesDialog.class
 hu\alkfejl\controller\Controller.class
 hu\alkfejl\controller\AES.class
+hu\alkfejl\model\bean\TableTypes.class
 hu\alkfejl\view\dialogs\RegisterWindow.class
 hu\alkfejl\model\bean\Kerdoiv.class
-hu\alkfejl\model\KerdesTipus.class
 hu\alkfejl\model\bean\Valasz.class
 hu\alkfejl\model\DAO.class
+hu\alkfejl\view\dialogs\EditKerdesDialog.class
 hu\alkfejl\view\tables\ValaszokTablazat.class
-hu\alkfejl\view\TableTypes.class
 hu\alkfejl\controller\EmailSender$1.class
 hu\alkfejl\view\TableViewController$1.class

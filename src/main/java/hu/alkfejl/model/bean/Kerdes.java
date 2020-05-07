@@ -1,6 +1,5 @@
 package hu.alkfejl.model.bean;
 
-import hu.alkfejl.model.KerdesTipus;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -67,6 +66,11 @@ public class Kerdes implements DatabaseObject{
     public IntegerProperty tipusProperty() {return tipus;}
 
     public void setTipus(int tipus) {this.tipus.set(tipus);}
+    public void setTipus(String tipus) {int i=0;
+        for (;i<KerdesTipus.tipusStringek.length;i++) {
+            if(tipus.equals(KerdesTipus.tipusStringek[i])){break;}
+        }
+        this.setTipus(i);}
 
     public int getSorszam() {return sorszam.get();}
 
@@ -80,4 +84,18 @@ public class Kerdes implements DatabaseObject{
 
     public void setKep(String kep) {this.kep.set(kep);}
     //endregion
+
+
+    @Override
+    public String toString() {
+        return "Kerdes{" +
+                "szoveg=" + szoveg +
+                ", tipus=" + tipus +
+                ", id=" + id +
+                ", kerdoivId=" + kerdoivId +
+                ", sorszam=" + sorszam +
+                ", valaszokSzama=" + valaszokSzama +
+                ", kep=" + kep +
+                '}';
+    }
 }

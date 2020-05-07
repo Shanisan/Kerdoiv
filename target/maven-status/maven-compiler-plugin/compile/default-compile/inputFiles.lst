@@ -1,7 +1,8 @@
 C:\Users\barat\IdeaProjects\Kerdoiv\src\main\java\hu\alkfejl\model\bean\Kerdoiv.java
 C:\Users\barat\IdeaProjects\Kerdoiv\src\main\java\hu\alkfejl\view\dialogs\AddKerdesDialog.java
+C:\Users\barat\IdeaProjects\Kerdoiv\src\main\java\hu\alkfejl\view\dialogs\EditKerdesDialog.java
 C:\Users\barat\IdeaProjects\Kerdoiv\src\main\java\hu\alkfejl\model\bean\Kerdes.java
-C:\Users\barat\IdeaProjects\Kerdoiv\src\main\java\hu\alkfejl\model\KerdesTipus.java
+C:\Users\barat\IdeaProjects\Kerdoiv\src\main\java\hu\alkfejl\view\dialogs\AddValaszDialog.java
 C:\Users\barat\IdeaProjects\Kerdoiv\src\main\java\hu\alkfejl\model\bean\DatabaseObject.java
 C:\Users\barat\IdeaProjects\Kerdoiv\src\main\java\hu\alkfejl\view\dialogs\WarningShower.java
 C:\Users\barat\IdeaProjects\Kerdoiv\src\main\java\hu\alkfejl\view\dialogs\LoginWindow.java
@@ -13,8 +14,9 @@ C:\Users\barat\IdeaProjects\Kerdoiv\src\main\java\hu\alkfejl\view\ButtonRow.java
 C:\Users\barat\IdeaProjects\Kerdoiv\src\main\java\hu\alkfejl\App.java
 C:\Users\barat\IdeaProjects\Kerdoiv\src\main\java\hu\alkfejl\controller\AES.java
 C:\Users\barat\IdeaProjects\Kerdoiv\src\main\java\hu\alkfejl\model\DAO.java
-C:\Users\barat\IdeaProjects\Kerdoiv\src\main\java\hu\alkfejl\view\TableTypes.java
 C:\Users\barat\IdeaProjects\Kerdoiv\src\main\java\hu\alkfejl\view\TableViewController.java
+C:\Users\barat\IdeaProjects\Kerdoiv\src\main\java\hu\alkfejl\model\bean\TableTypes.java
+C:\Users\barat\IdeaProjects\Kerdoiv\src\main\java\hu\alkfejl\model\bean\KerdesTipus.java
 C:\Users\barat\IdeaProjects\Kerdoiv\src\main\java\hu\alkfejl\view\dialogs\AddKerdoivDialog.java
 C:\Users\barat\IdeaProjects\Kerdoiv\src\main\java\hu\alkfejl\view\dialogs\EditKerdoivDialog.java
 C:\Users\barat\IdeaProjects\Kerdoiv\src\main\java\hu\alkfejl\view\tables\KerdoivekTablazat.java

@@ -17,22 +17,24 @@ import javafx.stage.Stage;
 
 import java.io.File;
 
-public class AddKerdesDialog {
+public class EditKerdesDialog {
 
-    public AddKerdesDialog(Controller controller, int kerdoivID) {createDialog(controller, kerdoivID);}
+    public EditKerdesDialog(Controller controller, int kerdoivID) {createDialog(controller, kerdoivID);}
 
-    private void createDialog(Controller c, int kerdoivID) {
+    private void createDialog(Controller c, int kerdesID) {
+        Kerdes k = c.getKerdes(kerdesID);
+
         Stage stage = new Stage();
         GridPane pane = new GridPane();
         //region mezok
-        TextField kerdesTF = new TextField();
+        TextField kerdesTF = new TextField(k.getSzoveg());
         kerdesTF.setPrefWidth(400);
         pane.add(new Label("Kérdés"), 0, 0);
         pane.add(kerdesTF, 1, 0);
 
         ObservableList<String> options= FXCollections.observableArrayList(KerdesTipus.tipusStringek);
         ComboBox tipusCB = new ComboBox(options);
-        tipusCB.setValue(KerdesTipus.tipusStringek[0]);
+        tipusCB.setValue(KerdesTipus.tipusStringek[k.getTipus()]);
         pane.add(new Label("Kérdés típusa"),0,2);
         pane.add(tipusCB,1,2);
 
@@ -54,7 +56,7 @@ public class AddKerdesDialog {
         pane.add(button,1,3);
         pane.add(label,2,3);
 
-        TextField sorszamTF = new TextField();
+        TextField sorszamTF = new TextField(Integer.toString(k.getSorszam()));
         pane.add(new Label("Sorszám (opcionális)"), 0, 4);
         pane.add(sorszamTF, 1, 4);
 //endregion
@@ -85,8 +87,12 @@ public class AddKerdesDialog {
             return;
             }
 //endregion
-            Kerdes k = new Kerdes(kerdesTF.getText(), (String) tipusCB.getValue(), sorszam, (file[0]==null?"":file[0].getAbsolutePath()));
-            if(App.controller.addKerdes(k)){
+            k.setSzoveg(kerdesTF.getText());
+            k.setSorszam(Integer.parseInt(sorszamTF.getText()));
+            k.setTipus((String) tipusCB.getValue());
+            k.setId(kerdesID);
+            System.out.println("Dialogban: "+k.toString());
+            if(App.controller.editKerdes(k, kerdesID, (file[0]==null?"":file[0].getAbsolutePath()))){
                 App.TVC.refreshTable();
                 stage.close();
             } else {

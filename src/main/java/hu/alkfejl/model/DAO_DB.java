@@ -1,8 +1,7 @@
 package hu.alkfejl.model;
 
-import hu.alkfejl.model.bean.Kerdes;
-import hu.alkfejl.model.bean.Kerdoiv;
-import hu.alkfejl.view.dialogs.WarningShower;
+import hu.alkfejl.App;
+import hu.alkfejl.model.bean.*;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -158,10 +157,6 @@ public class DAO_DB implements DAO{
                     " kezdesiIdo, befejezesiIdo, kitoltesiIdo, link, Adminok.username FROM Kerdoiv LEFT JOIN Kerdes ON Kerdoiv.id=Kerdes.kerdoivID " +
                     "LEFT JOIN Kitoltes ON Kitoltes.kerdoivID=Kerdes.id LEFT JOIN Adminok ON Adminok.id=Kerdoiv.letrehozoID " +
                     "WHERE Kerdoiv.letrehozoID="+adminID+" GROUP BY Kerdoiv.id;");
-            System.out.println("SELECT Kerdoiv.id, Kerdoiv.nev, COUNT(Kerdes.id), COUNT(Kitoltes.id)," +
-                    " kezdesiIdo, befejezesiIdo, kitoltesiIdo, link, Adminok.username FROM Kerdoiv LEFT JOIN Kerdes ON Kerdoiv.id=Kerdes.kerdoivID " +
-                    "LEFT JOIN Kitoltes ON Kitoltes.kerdoivID=Kerdes.id LEFT JOIN Adminok ON Adminok.id=Kerdoiv.letrehozoID " +
-                    "WHERE Kerdoiv.letrehozoID="+adminID+" GROUP BY Kerdoiv.id;");
             while(rs.next()){
                 Kerdoiv k = new Kerdoiv(
                         rs.getInt(1),
@@ -185,7 +180,16 @@ public class DAO_DB implements DAO{
 
     @Override
     public Kerdes getKerdes(int kerdesID) {
-        return null;
+        Kerdes k = null;
+        try(Connection conn = DriverManager.getConnection(DB_FILE); Statement st = conn.createStatement();){
+            ResultSet rs = st.executeQuery("SELECT szoveg, sorszam, kep, tipus FROM Kerdes where id="+kerdesID);
+            while(rs.next()){
+                k=new Kerdes(rs.getString(1), KerdesTipus.tipusStringek[rs.getInt(4)], rs.getInt(2), rs.getString(3));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return k;
     }
 
     @Override
@@ -198,6 +202,7 @@ public class DAO_DB implements DAO{
                 k.setKezdet(rs.getTimestamp(2));
                 k.setVege(rs.getTimestamp(3));
                 k.setIdo(rs.getInt(4));
+                k.setId(kerdoivID);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -206,20 +211,24 @@ public class DAO_DB implements DAO{
     }
 
     @Override
-    public boolean deleteRow(String typeToDelete, int id) {
-        try(Connection conn = DriverManager.getConnection(DB_FILE); Statement st = conn.createStatement();){
+    public boolean deleteEverything(Kerdoiv delKerdoiv, List<Kerdes> delKerdes, List<Valasz> delValasz) {
+        try (Connection conn = DriverManager.getConnection(DB_FILE); Statement st = conn.createStatement();){
             conn.setAutoCommit(false);
-            try{
-                st.execute("DELETE FROM "+typeToDelete+" WHERE ID="+id);
-                conn.commit();
-                return true;
-            } catch (SQLException e) {
-                conn.rollback();
+            if(delKerdoiv!=null){
+                st.execute("DELETE FROM Kerdoiv WHERE id="+delKerdoiv.getId());
             }
+            for (Kerdes k:delKerdes) {
+                st.execute("DELETE FROM Kerdes WHERE id="+k.getId());
+            }
+            for (Valasz v:delValasz) {
+                st.execute("DELETE FROM Valasz WHERE id="+v.getId());
+            }
+            conn.commit();
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
-        return false;
+        return true;
     }
 
     @Override
@@ -233,11 +242,6 @@ public class DAO_DB implements DAO{
             st.setTimestamp(3, k.getVege());
             st.setInt(4, k.getIdo());
             st.setInt(5, k.getId());
-            System.out.println("nev - "+k.getNev());
-            System.out.println("kezdet - "+k.getKezdet().toString());
-            System.out.println("vege - "+k.getVege().toString());
-            System.out.println("ido - "+k.getIdo());
-            System.out.println("ID - "+k.getId());
             try{
                 st.execute();
             }catch (SQLException sqlE){
@@ -253,7 +257,66 @@ public class DAO_DB implements DAO{
         }
     }
 
-        public List<String> getAdminList(){
+    @Override
+    public boolean editKerdes(Kerdes k, int kerdesID) {
+        //System.out.println("DAO-ban: "+k.toString());
+        try (Connection conn = DriverManager.getConnection(DB_FILE); PreparedStatement st = conn.prepareStatement(
+                "UPDATE Kerdes SET szoveg=?, sorszam=?, tipus=?, kep=? WHERE id=?;"
+        );) {
+            conn.setAutoCommit(false);
+            st.setString(1, k.getSzoveg());
+            st.setInt(2, k.getSorszam());
+            st.setInt(3, k.getTipus());
+            st.setString(4, k.getKep());
+            st.setInt(5, k.getId());
+            try{
+                st.execute();
+            }catch (SQLException sqlE){
+                sqlE.printStackTrace();
+                conn.rollback();
+                return false;
+            }
+            conn.commit();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public List<Valasz> getValaszokList(int kerdesID) {
+        List<Valasz> list = new ArrayList<>();
+        try(Connection conn = DriverManager.getConnection(DB_FILE); Statement st = conn.createStatement();){
+            ResultSet rs = st.executeQuery("SELECT id, szoveg FROM Valasz WHERE kerdesID="+kerdesID+" ORDER BY sorszam");
+            while(rs.next()){
+                int id=+rs.getInt(1);
+                String szoveg=rs.getString(2);
+                Valasz v = new Valasz(id, szoveg);
+                System.out.println(v.toString());
+                list.add(v);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    @Override
+    public Valasz getValasz(int valaszID) {
+        Valasz k = null;
+        try(Connection conn = DriverManager.getConnection(DB_FILE); Statement st = conn.createStatement();){
+            ResultSet rs = st.executeQuery("SELECT id, szoveg FROM Valasz where id="+valaszID);
+            while(rs.next()){
+                k=new Valasz(rs.getInt(1), rs.getString(2));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return k;
+    }
+
+    public List<String> getAdminList(){
         List<String> admins = new ArrayList<>();
         try(Connection conn = DriverManager.getConnection(DB_FILE); Statement st = conn.createStatement();){
             ResultSet rs = st.executeQuery("SELECT username FROM Adminok;");

@@ -24,6 +24,11 @@ public class Valasz implements DatabaseObject {
         this.setSorszam(sorszam);
     }
 
+    public Valasz(int ID, String szoveg) {
+        this.setId(ID);
+        this.setSzoveg(szoveg);
+    }
+
     public int getId() {
         return id.get();
     }
@@ -70,5 +75,15 @@ public class Valasz implements DatabaseObject {
 
     public void setSorszam(int sorszam) {
         this.sorszam.set(sorszam);
+    }
+
+    @Override
+    public String toString() {
+        return "Valasz{" +
+                "id=" + id +
+                ", kerdesID=" + kerdesID +
+                ", szoveg=" + szoveg +
+                ", sorszam=" + sorszam +
+                '}';
     }
 }

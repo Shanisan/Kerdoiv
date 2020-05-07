@@ -2,7 +2,9 @@ package hu.alkfejl.model;
 
 import hu.alkfejl.model.bean.Kerdes;
 import hu.alkfejl.model.bean.Kerdoiv;
+import hu.alkfejl.model.bean.Valasz;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface DAO {
@@ -12,6 +14,12 @@ public interface DAO {
     List<Kerdoiv> getKerdoivList(int adminID);
     Kerdes getKerdes(int kerdesID);
     Kerdoiv getKerdoiv(int kerdoivID);
-    boolean deleteRow(String typeToDelete, int id);
+    boolean deleteEverything(Kerdoiv delKerdoiv, List<Kerdes> delKerdes, List<Valasz> delValasz);
     boolean editKerdoiv(Kerdoiv k);
+
+    boolean editKerdes(Kerdes k, int kerdesID);
+
+    List<Valasz> getValaszokList(int kerdesID);
+
+    Valasz getValasz(int valaszID);
 }

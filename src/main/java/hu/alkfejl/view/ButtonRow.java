@@ -1,29 +1,21 @@
 package hu.alkfejl.view;
 
 import hu.alkfejl.App;
-import hu.alkfejl.controller.AES;
-import hu.alkfejl.controller.EmailSender;
-import hu.alkfejl.model.DriveConnection;
 import hu.alkfejl.model.bean.DatabaseObject;
-import hu.alkfejl.model.bean.Kerdoiv;
-import hu.alkfejl.view.dialogs.AddKerdesDialog;
-import hu.alkfejl.view.dialogs.AddKerdoivDialog;
-import hu.alkfejl.view.dialogs.EditKerdoivDialog;
-import hu.alkfejl.view.dialogs.WarningShower;
+import hu.alkfejl.model.bean.TableTypes;
+import hu.alkfejl.view.dialogs.*;
 import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.HBox;
 
-import java.io.IOException;
-import java.security.GeneralSecurityException;
 import java.util.Optional;
 
 public class ButtonRow extends HBox {
     //kozos gombok
     Button test = new Button("Test");
-    Button vissza = new Button("Vissza a kérdőívekhez");
+    Button vissza = new Button("Vissza");
     Button szerkeszt = new Button("Szerkesztés");
     Button torol = new Button("Törlés");
     //kedoives gombok
@@ -34,18 +26,34 @@ public class ButtonRow extends HBox {
     Button valaszok = new Button("Válaszok");
     Button addKerdes = new Button("Új kérdés");
     //valaszos gombok
+
+
     //kitolteses gombok
+
+
 
     public ButtonRow() {
         kerdesek.setOnAction(e->{
-            App.TVC.setCurrentlyActiveTable(TableTypes.KERDES);
-            switchButtonRow();
-            System.out.println("Kerdeseket kellene latnunk");
+            if(App.TVC.setCurrentlyActiveTable(TableTypes.KERDES)){
+                switchButtonRow();
+                System.out.println("Kerdeseket kellene latnunk");
+            }
         });
         vissza.setOnAction(e->{
-            App.TVC.setCurrentlyActiveTable(TableTypes.KERDOIV);
-            switchButtonRow();
-            System.out.println("Kerdoiveket kellene latnunk");
+            switch (App.TVC.getCurrentlyActiveTable()){
+                case KERDES:
+                    if(App.TVC.setCurrentlyActiveTable(TableTypes.KERDOIV)){
+                        switchButtonRow();
+                        System.out.println("Kerdoiveket kellene latnunk");
+                    }
+                    break;
+                case VALASZ:
+                    if(App.TVC.setCurrentlyActiveTable(TableTypes.KERDES)){
+                        switchButtonRow();
+                        System.out.println("Kerdeseket kellene latnunk");
+                    }
+                    break;
+            }
         });
         addKerdoiv.setOnAction(e -> {
             new AddKerdoivDialog(App.controller);
@@ -54,7 +62,7 @@ public class ButtonRow extends HBox {
             new AddKerdesDialog(App.controller, App.TVC.kerdoivID);
         });
         torol.setOnAction(e->{
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Biztosaj törölni szeretné a kijelölt elemet?",
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Biztosan törölni szeretné a kijelölt elemet?",
                     ButtonType.YES, ButtonType.NO);
             Optional<ButtonType> result = alert.showAndWait();
             if(result.get() == ButtonType.YES){
@@ -78,19 +86,25 @@ public class ButtonRow extends HBox {
                 id=((DatabaseObject)App.TVC.getTable().getSelectionModel().getSelectedItem()).getId();
             }catch (NullPointerException npe){}
             if(id!=-1){
-                new EditKerdoivDialog(App.controller, id);
+                switch(App.TVC.getCurrentlyActiveTable()){
+                    case KERDOIV:
+                        new EditKerdoivDialog(App.controller, id);
+                        break;
+                    case KERDES:
+                        new EditKerdesDialog(App.controller, id);
+                }
             }else{
                 WarningShower.showWarning("Nincs kijelölt elem!");
             }
         });
-        /*test.setOnAction(e->{
-            try {
-                DriveConnection.accessGoogleDrive();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            } catch (GeneralSecurityException ex) {
-                ex.printStackTrace();
+        valaszok.setOnAction(e->{
+            if(App.TVC.setCurrentlyActiveTable(TableTypes.VALASZ)){
+                switchButtonRow();
+                System.out.println("Valaszokat kellene latnunk");
             }
+        });
+        /*test.setOnAction(e->{
+            App.lockdown();
         });*/
         switchButtonRow();
         this.setPadding(new Insets(5));
@@ -101,7 +115,7 @@ public class ButtonRow extends HBox {
         switch (App.TVC.getCurrentlyActiveTable()){
             case KERDOIV:
                 displayNone();
-                this.getChildren().addAll(addKerdoiv, szerkeszt, torol, kerdesek, kitoltesek);
+                this.getChildren().addAll(addKerdoiv, szerkeszt, torol, kerdesek, kitoltesek, test);
                 break;
             case KERDES:
                 displayNone();
