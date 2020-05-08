@@ -41,7 +41,7 @@ public class DAO_DB implements DAO{
                     ", tipus NOT NULL DEFAULT 1);"+
                     "CREATE TABLE \"Kerdoiv\" (\n" +
                     "\t\"id\"\tINTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,\n" +
-                    "\t\"nev\"\tTEXT,\n" +
+                    "\t\"nev\"\tTEXT UNIQUE,\n" +
                     "\t\"kezdesiIdo\"\tdatetime NOT NULL DEFAULT '2001-09-11 9:11:00.000',\n" +
                     "\t\"befejezesiIdo\"\tdatetime NOT NULL DEFAULT '2001-09-11 9:11:00.000',\n" +
                     "\t\"kitoltesiIdo\"\tNUMERIC NOT NULL DEFAULT 0,\n" +
@@ -268,8 +268,8 @@ public class DAO_DB implements DAO{
         );) {
             conn.setAutoCommit(false);
             st.setString(1, k.getNev());
-            st.setTimestamp(2, k.getKezdet());
-            st.setTimestamp(3, k.getVege());
+            st.setString(2, k.getKezdet().toString());
+            st.setString(3, k.getVege().toString());
             st.setInt(4, k.getIdo());
             st.setInt(5, k.getId());
             try{
