@@ -4,6 +4,8 @@ import hu.alkfejl.App;
 import hu.alkfejl.model.bean.*;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
@@ -92,8 +94,9 @@ public class DAO_DB implements DAO{
 
     private void initTable(){
         System.out.println(DB_FILE);
+        File db = null;
         try {
-            File db = new File(APP_HOME+DB_FILENAME);
+            db = new File(APP_HOME+DB_FILENAME);
             db.getParentFile().mkdirs();
             db.createNewFile();
         } catch (IOException e) {
@@ -101,7 +104,9 @@ public class DAO_DB implements DAO{
         }
         try(Connection conn = DriverManager.getConnection(DB_FILE);
             Statement st = conn.createStatement();){
-            //st.executeUpdate(CREATE_DB);
+            if(db.length()==0){
+                st.executeUpdate(CREATE_DB);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

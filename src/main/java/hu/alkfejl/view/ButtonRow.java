@@ -1,7 +1,6 @@
 package hu.alkfejl.view;
 
 import hu.alkfejl.App;
-import hu.alkfejl.model.DriveConnection;
 import hu.alkfejl.model.bean.DatabaseObject;
 import hu.alkfejl.model.bean.TableTypes;
 import hu.alkfejl.view.dialogs.*;
@@ -113,7 +112,7 @@ public class ButtonRow extends HBox {
             }
         });
         test.setOnAction(e->{
-            DriveConnection.downloadData();
+            //DriveConnection.downloadData();
         });
         switchButtonRow();
         this.setPadding(new Insets(5));
