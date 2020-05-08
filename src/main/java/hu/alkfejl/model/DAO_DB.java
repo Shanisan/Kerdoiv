@@ -185,6 +185,7 @@ public class DAO_DB implements DAO{
             ResultSet rs = st.executeQuery("SELECT szoveg, sorszam, kep, tipus FROM Kerdes where id="+kerdesID);
             while(rs.next()){
                 k=new Kerdes(rs.getString(1), KerdesTipus.tipusStringek[rs.getInt(4)], rs.getInt(2), rs.getString(3));
+                k.setId(kerdesID);
             }
         } catch (SQLException e) {
             e.printStackTrace();

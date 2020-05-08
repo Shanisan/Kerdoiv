@@ -91,7 +91,7 @@ public class EditKerdesDialog {
             k.setSorszam(Integer.parseInt(sorszamTF.getText()));
             k.setTipus((String) tipusCB.getValue());
             k.setId(kerdesID);
-            System.out.println("Dialogban: "+k.toString());
+            //System.out.println("Dialogban: "+k.toString());
             if(App.controller.editKerdes(k, kerdesID, (file[0]==null?"":file[0].getAbsolutePath()))){
                 App.TVC.refreshTable();
                 stage.close();
