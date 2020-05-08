@@ -117,4 +117,6 @@ public class TableViewController {
     }
 
     public int getKerdoivID() {return kerdoivID;}
+
+    public int getKerdesID() {return kerdesID;}
 }

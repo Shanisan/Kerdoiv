@@ -307,14 +307,46 @@ public class DAO_DB implements DAO{
     public Valasz getValasz(int valaszID) {
         Valasz k = null;
         try(Connection conn = DriverManager.getConnection(DB_FILE); Statement st = conn.createStatement();){
-            ResultSet rs = st.executeQuery("SELECT id, szoveg FROM Valasz where id="+valaszID);
+            ResultSet rs = st.executeQuery("SELECT id, szoveg, kerdesID, sorszam FROM Valasz where id="+valaszID);
             while(rs.next()){
-                k=new Valasz(rs.getInt(1), rs.getString(2));
+                k=new Valasz(rs.getInt(1), rs.getInt(3), rs.getString(2), rs.getInt(4));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return k;
+    }
+
+    @Override
+    public boolean addValasz(Valasz v) {
+        try (Connection conn = DriverManager.getConnection(DB_FILE); PreparedStatement st = conn.prepareStatement("INSERT INTO Valasz (szoveg, kerdesID, sorszam) VALUES (?, ?, ?)");){
+            st.setString(1, v.getSzoveg());
+            st.setInt(2, v.getKerdesID());
+            st.setInt(3, v.getSorszam());
+            st.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean editValasz(Valasz v) {
+        System.out.println(v.toString());
+        try (Connection conn = DriverManager.getConnection(DB_FILE); PreparedStatement st = conn.prepareStatement("UPDATE Valasz SET szoveg=?, sorszam=? WHERE id=?");){
+            st.setString(1, v.getSzoveg());
+            st.setInt(3, v.getId());
+            st.setInt(2, v.getSorszam());
+            if(st.executeUpdate()==1){
+                return true;
+            }else{
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     public List<String> getAdminList(){

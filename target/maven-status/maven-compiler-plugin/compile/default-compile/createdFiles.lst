@@ -9,6 +9,7 @@ hu\alkfejl\view\ButtonRow$1.class
 hu\alkfejl\view\ButtonRow.class
 hu\alkfejl\model\bean\Kerdes.class
 hu\alkfejl\model\DAO_DB.class
+hu\alkfejl\view\dialogs\EditValaszDialog.class
 hu\alkfejl\view\tables\KerdoivekTablazat.class
 hu\alkfejl\App.class
 hu\alkfejl\controller\EmailSender.class

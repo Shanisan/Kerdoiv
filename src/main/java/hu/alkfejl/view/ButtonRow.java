@@ -26,6 +26,7 @@ public class ButtonRow extends HBox {
     Button valaszok = new Button("Válaszok");
     Button addKerdes = new Button("Új kérdés");
     //valaszos gombok
+    Button addValasz = new Button("Új válaszlehetőság");
 
 
     //kitolteses gombok
@@ -61,6 +62,9 @@ public class ButtonRow extends HBox {
         addKerdes.setOnAction(e -> {
             new AddKerdesDialog(App.controller, App.TVC.kerdoivID);
         });
+        addValasz.setOnAction(e -> {
+            new AddValaszDialog(App.controller, App.TVC.kerdoivID);
+        });
         torol.setOnAction(e->{
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Biztosan törölni szeretné a kijelölt elemet?",
                     ButtonType.YES, ButtonType.NO);
@@ -92,6 +96,10 @@ public class ButtonRow extends HBox {
                         break;
                     case KERDES:
                         new EditKerdesDialog(App.controller, id);
+                        break;
+                    case VALASZ:
+                        new EditValaszDialog(App.controller, id);
+                        break;
                 }
             }else{
                 WarningShower.showWarning("Nincs kijelölt elem!");
@@ -115,13 +123,15 @@ public class ButtonRow extends HBox {
         switch (App.TVC.getCurrentlyActiveTable()){
             case KERDOIV:
                 displayNone();
-                this.getChildren().addAll(addKerdoiv, szerkeszt, torol, kerdesek, kitoltesek, test);
+                this.getChildren().addAll(addKerdoiv, szerkeszt, torol, kerdesek, kitoltesek);
                 break;
             case KERDES:
                 displayNone();
                 this.getChildren().addAll(vissza, addKerdes, szerkeszt, torol, valaszok);
                 break;
             case VALASZ:
+                displayNone();
+                this.getChildren().addAll(vissza, addValasz, szerkeszt, torol);
                 break;
             case VALASZADAS:
                 break;

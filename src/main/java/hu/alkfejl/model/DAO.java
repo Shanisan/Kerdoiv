@@ -22,4 +22,8 @@ public interface DAO {
     List<Valasz> getValaszokList(int kerdesID);
 
     Valasz getValasz(int valaszID);
+
+    boolean addValasz(Valasz v);
+
+    boolean editValasz(Valasz v);
 }

@@ -201,4 +201,14 @@ public class ControllerImpl implements Controller {
     public List<Valasz> getValaszList(int kerdesID) {
         return dao.getValaszokList(kerdesID);
     }
+
+    @Override
+    public boolean addValasz(Valasz v) {
+        return dao.addValasz(v);
+    }
+
+    @Override
+    public boolean editValasz(Valasz v) {
+        return dao.editValasz(v);
+    }
 }

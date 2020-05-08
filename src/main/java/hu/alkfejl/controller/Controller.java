@@ -23,4 +23,8 @@ public interface Controller {
     boolean editKerdes(Kerdes k, int kerdesID, String ujKep);
 
     List<Valasz> getValaszList(int kerdesID);
+
+    boolean addValasz(Valasz v);
+
+    boolean editValasz(Valasz v);
 }
