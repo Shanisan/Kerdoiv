@@ -3,12 +3,17 @@ package hu.alkfejl.model;
 import hu.alkfejl.App;
 import hu.alkfejl.model.bean.*;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DAO_DB implements DAO{
-    private static final String DB_FILE = "jdbc:sqlite:kerdoiv.db";
+
+    public static final String APP_HOME = System.getProperty("user.home")+"/Kerdoiv-BSG/";
+    public static final String DB_FILENAME = "data/kerdoiv.db";
+    private static final String DB_FILE = "jdbc:sqlite:"+APP_HOME+DB_FILENAME;
 
     private static final String INSERT_KERDOIV =
             "INSERT INTO Kerdoiv(nev, kezdesiIdo, befejezesiIdo, kitoltesiIdo, letrehozoID) VALUES (?, ?, ?, ?, ?);";
@@ -19,34 +24,45 @@ public class DAO_DB implements DAO{
 //region db_sql
     private static final String CREATE_DB =
             "BEGIN TRANSACTION;\n" +
-                    "CREATE TABLE IF NOT EXISTS \"Kerdes\" (\n" +
+                    "CREATE TABLE \"Adminok\" (\n" +
+                    "\t\"id\"\tINTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n" +
+                    "\t\"username\"\tTEXT NOT NULL,\n" +
+                    "\t\"email\"\tTEXT NOT NULL,\n" +
+                    "\t\"password\"\tTEXT NOT NULL\n" +
+                    ");"+
+                    "CREATE TABLE \"Kerdes\" (\n" +
                     "\t\"id\"\tINTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n" +
                     "\t\"kerdoivID\"\tINTEGER NOT NULL,\n" +
                     "\t\"szoveg\"\tTEXT NOT NULL,\n" +
                     "\t\"sorszam\"\tINTEGER,\n" +
-                    "\t\"kep\"\tTEXT,\n" +
-                    "\t\"tipus\"\tTEXT NOT NULL DEFAULT 1\n" +
-                    ");\n" +
-                    "CREATE TABLE IF NOT EXISTS \"Person\" (\n" +
+                    "\t\"kep\"\tTEXT\n" +
+                    ", tipus NOT NULL DEFAULT 1);"+
+                    "CREATE TABLE \"Kerdoiv\" (\n" +
                     "\t\"id\"\tINTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,\n" +
-                    "\t\"nev\"\tTEXT\n" +
-                    ");\n" +
-                    "CREATE TABLE IF NOT EXISTS \"Kitoltes\" (\n" +
+                    "\t\"nev\"\tTEXT,\n" +
+                    "\t\"kezdesiIdo\"\tdatetime NOT NULL DEFAULT '2001-09-11 9:11:00.000',\n" +
+                    "\t\"befejezesiIdo\"\tdatetime NOT NULL DEFAULT '2001-09-11 9:11:00.000',\n" +
+                    "\t\"kitoltesiIdo\"\tNUMERIC NOT NULL DEFAULT 0,\n" +
+                    "\t\"link\"\tTEXT NOT NULL DEFAULT '',\n" +
+                    "\t\"letrehozoID\"\tNUMERIC NOT NULL DEFAULT 0\n" +
+                    ");"+
+                    "CREATE TABLE \"Kitoltes\" (\n" +
                     "\t\"id\"\tINTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,\n" +
                     "\t\"kerdoivID\"\tINTEGER NOT NULL,\n" +
                     "\t\"ip\"\tTEXT,\n" +
                     "\t\"valaszok\"\tBLOB NOT NULL\n" +
-                    ");\n" +
-                    "CREATE TABLE IF NOT EXISTS \"Valasz\" (\n" +
+                    ");"+
+                    "CREATE TABLE \"Person\" (\n" +
+                    "\t\"ip\"\tINTEGER NOT NULL UNIQUE,\n" +
+                    "\t\"nev\"\tTEXT,\n" +
+                    "\tPRIMARY KEY(\"ip\")\n" +
+                    ");"+
+                    "CREATE TABLE \"Valasz\" (\n" +
                     "\t\"id\"\tINTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,\n" +
                     "\t\"szoveg\"\tTEXT NOT NULL,\n" +
                     "\t\"kerdesID\"\tINTEGER NOT NULL,\n" +
                     "\t\"sorszam\"\tINTEGER NOT NULL\n" +
-                    ");\n" +
-                    "CREATE TABLE IF NOT EXISTS \"Kerdoiv\" (\n" +
-                    "\t\"id\"\tINTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,\n" +
-                    "\t\"nev\"\tTEXT\n" +
-                    ");\n" +
+                    ");"+
                     "COMMIT;";
 //endregion
 
@@ -75,9 +91,17 @@ public class DAO_DB implements DAO{
     }
 
     private void initTable(){
+        System.out.println(DB_FILE);
+        try {
+            File db = new File(APP_HOME+DB_FILENAME);
+            db.getParentFile().mkdirs();
+            db.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         try(Connection conn = DriverManager.getConnection(DB_FILE);
             Statement st = conn.createStatement();){
-            st.executeUpdate(CREATE_DB);
+            //st.executeUpdate(CREATE_DB);
         } catch (SQLException e) {
             e.printStackTrace();
         }

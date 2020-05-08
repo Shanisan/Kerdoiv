@@ -33,9 +33,10 @@ public class ControllerImpl implements Controller {
     public boolean addKerdoiv(Kerdoiv k) {return dao.addKerdoiv(k);}
 
     //region kerdes hozzaadasa
-    File numPics = new File("data/pics.data");
+    File numPics = new File(DAO_DB.APP_HOME+"data/pics.data");
     @Override
     public boolean addKerdes(Kerdes k) {
+        //todo kep url-bol
         if(k.getKep()!=""){
             Path source = Paths.get(k.getKep());
             DecimalFormat formater = new DecimalFormat("0000000");
@@ -49,7 +50,7 @@ public class ControllerImpl implements Controller {
                 }else{
                     numberOfImages = Integer.parseInt(num);
                 }
-                String filename = "data/img_"+formater.format(numberOfImages)+k.getKep().substring(k.getKep().length()-4);
+                String filename = DAO_DB.APP_HOME+"data/img_"+formater.format(numberOfImages)+k.getKep().substring(k.getKep().length()-4);
                 Path destination = Paths.get(filename);
                 Files.copy(source, destination, StandardCopyOption.REPLACE_EXISTING);
                 k.setKep(filename);

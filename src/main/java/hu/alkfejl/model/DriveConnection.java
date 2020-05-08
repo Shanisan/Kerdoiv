@@ -56,13 +56,14 @@ public class DriveConnection{
         return new AuthorizationCodeInstalledApp(flow, receiver).authorize("user");
     }
 
-    public static void accessGoogleDrive() throws IOException, GeneralSecurityException {
+    public static Drive accessGoogleDrive() throws IOException, GeneralSecurityException {
         // Build a new authorized API client service.
         final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
         Drive service = new Drive.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
                 .setApplicationName(APPLICATION_NAME)
                 .build();
-
+        return service;
+/*
         // Print the names and IDs for up to 10 files.
         FileList result = service.files().list()
                 .setPageSize(10)
@@ -76,6 +77,29 @@ public class DriveConnection{
             for (File file : files) {
                 System.out.printf("%s (%s)\n", file.getName(), file.getId());
             }
+        }*/
+    }
+
+    public static boolean downloadData() {
+        try {
+            Drive drive = accessGoogleDrive();
+            FileList list = drive.files().list().setFields("nextPageToken, files(id, name)").execute();
+            List<File> files = list.getFiles();
+            if (files == null || files.isEmpty()) {
+                System.out.println("No files found.");
+            } else {
+                System.out.println("Files:");
+                for (File file : files) {
+                    System.out.printf("%s (%s)\n", file.getName(), file.getId());
+                }
+            }
+        } catch (GeneralSecurityException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
+
+        return true;
     }
 }

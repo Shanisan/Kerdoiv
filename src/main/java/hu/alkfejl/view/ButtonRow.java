@@ -1,6 +1,7 @@
 package hu.alkfejl.view;
 
 import hu.alkfejl.App;
+import hu.alkfejl.model.DriveConnection;
 import hu.alkfejl.model.bean.DatabaseObject;
 import hu.alkfejl.model.bean.TableTypes;
 import hu.alkfejl.view.dialogs.*;
@@ -111,9 +112,9 @@ public class ButtonRow extends HBox {
                 System.out.println("Valaszokat kellene latnunk");
             }
         });
-        /*test.setOnAction(e->{
-            App.lockdown();
-        });*/
+        test.setOnAction(e->{
+            DriveConnection.downloadData();
+        });
         switchButtonRow();
         this.setPadding(new Insets(5));
         this.setSpacing(5);
@@ -123,7 +124,7 @@ public class ButtonRow extends HBox {
         switch (App.TVC.getCurrentlyActiveTable()){
             case KERDOIV:
                 displayNone();
-                this.getChildren().addAll(addKerdoiv, szerkeszt, torol, kerdesek, kitoltesek);
+                this.getChildren().addAll(addKerdoiv, szerkeszt, torol, kerdesek, kitoltesek, test);
                 break;
             case KERDES:
                 displayNone();
