@@ -157,7 +157,7 @@ public class ControllerImpl implements Controller {
     }
 
     @Override
-    public boolean editKerdes(Kerdes k, int kerdesID, String ujKep) {
+    public boolean editKerdes(Kerdes k, int kerdesID, String ujKep, boolean delete) {
         //System.out.println("Regi kep: '"+k.getKep()+"'\nUj kep: '"+ujKep+"'");
         if(!k.getKep().equals("")){
             Path source = Paths.get(ujKep);
@@ -193,6 +193,10 @@ public class ControllerImpl implements Controller {
                 e.printStackTrace();
                 return false;
             }
+        }
+        if(delete){
+            //System.out.println("Kep=null");
+            k.setKep("");
         }
         //System.out.println("Controllerben: "+k.toString());
         return dao.editKerdes(k, kerdesID);

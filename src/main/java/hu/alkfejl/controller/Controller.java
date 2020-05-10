@@ -21,7 +21,7 @@ public interface Controller {
     public boolean deleteRow(String typeToDelete, int id);
     boolean editKerdoiv(Kerdoiv k);
 
-    boolean editKerdes(Kerdes k, int kerdesID, String ujKep);
+    boolean editKerdes(Kerdes k, int kerdesID, String ujKep, boolean delete);
 
     List<Valasz> getValaszList(int kerdesID);
 

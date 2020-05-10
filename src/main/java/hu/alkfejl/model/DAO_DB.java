@@ -183,17 +183,19 @@ public class DAO_DB implements DAO{
     @Override
     public List<Kerdoiv> getKerdoivList(int adminID) {
         List<Kerdoiv> list = new ArrayList<>();
-        try(Connection conn = DriverManager.getConnection(DB_FILE); Statement st = conn.createStatement();){
+        try(Connection conn = DriverManager.getConnection(DB_FILE); Statement st = conn.createStatement(); Statement st2 = conn.createStatement(); Statement st3 = conn.createStatement()){
             ResultSet rs = st.executeQuery("SELECT Kerdoiv.id, Kerdoiv.nev, COUNT(Kerdes.id), COUNT(Kitoltes.id)," +
                     " kezdesiIdo, befejezesiIdo, kitoltesiIdo, link, Adminok.username FROM Kerdoiv LEFT JOIN Kerdes ON Kerdoiv.id=Kerdes.kerdoivID " +
                     "LEFT JOIN Kitoltes ON Kitoltes.kerdoivID=Kerdes.id LEFT JOIN Adminok ON Adminok.id=Kerdoiv.letrehozoID " +
                     "WHERE Kerdoiv.letrehozoID="+adminID+" GROUP BY Kerdoiv.id;");
-            while(rs.next()){
+            ResultSet rs2 = st2.executeQuery("select count(kitoltes.id) from kerdoiv left join Kitoltes on Kerdoiv.id=Kitoltes.kerdoivID group by kerdoiv.id");
+            ResultSet rs3 = st3.executeQuery("select count(kerdes.id) from kerdoiv left join kerdes on Kerdoiv.id=kerdes.kerdoivID group by kerdoiv.id");
+            while(rs.next() && rs2.next() && rs3.next()){
                 Kerdoiv k = new Kerdoiv(
                         rs.getInt(1),
                         rs.getString(2),
-                        rs.getInt(3),
-                        rs.getInt(4),
+                        rs3.getInt(1),
+                        rs2.getInt(1),
                         rs.getTimestamp(5),
                         rs.getTimestamp(6),
                         rs.getInt(7),
@@ -295,6 +297,7 @@ public class DAO_DB implements DAO{
         try (Connection conn = DriverManager.getConnection(DB_FILE); PreparedStatement st = conn.prepareStatement(
                 "UPDATE Kerdes SET szoveg=?, sorszam=?, tipus=?, kep=? WHERE id=?;"
         );) {
+            //System.out.println("Kep: "+k.getKep());
             conn.setAutoCommit(false);
             st.setString(1, k.getSzoveg());
             st.setInt(2, k.getSorszam());

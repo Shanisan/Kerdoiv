@@ -7,10 +7,7 @@ import hu.alkfejl.model.bean.Kerdes;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -55,6 +52,9 @@ public class EditKerdesDialog {
         pane.add(new Label("Kép (opcionális)"),0,3);
         pane.add(button,1,3);
         pane.add(label,2,3);
+        pane.add(new Label("Kép törlése?"), 3, 3);
+        CheckBox delete = new CheckBox();
+        pane.add(delete, 4, 3);
 
         TextField sorszamTF = new TextField(Integer.toString(k.getSorszam()));
         pane.add(new Label("Sorszám (opcionális)"), 0, 4);
@@ -92,7 +92,11 @@ public class EditKerdesDialog {
             k.setTipus((String) tipusCB.getValue());
             k.setId(kerdesID);
             //System.out.println("Dialogban: "+k.toString());
-            if(App.controller.editKerdes(k, kerdesID, (file[0]==null?"":file[0].getAbsolutePath()))){
+            if(App.controller.editKerdes(k, kerdesID, (file[0]==null?"":file[0].getAbsolutePath()), delete.isSelected())){
+                if(delete.isSelected()){
+                    File f = new File(k.getKep());
+                    f.delete();
+                }
                 App.TVC.refreshTable();
                 stage.close();
             } else {
