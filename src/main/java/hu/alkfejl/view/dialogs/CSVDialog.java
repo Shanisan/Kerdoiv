@@ -78,7 +78,7 @@ public class CSVDialog {
 
         stage.show();
     }
-    String[] HEADERS = { "kitolto", "kerdes", "valasz"};
+    String[] HEADERS = { "kitolto", "kerdes", "valasz", "kitoltesIdeje"};
 
     public void createCSVFile(List<Kitoltes> kitoltes, File file) throws IOException {
         FileWriter out = new FileWriter(file);
@@ -87,7 +87,7 @@ public class CSVDialog {
                 .withHeader(HEADERS))) {
             for (Kitoltes k:kitoltes) {
                 for (Map.Entry<String, String> entry:k.getValaszok().entrySet()) {
-                    printer.printRecord(k.getKitolto(), entry.getKey(), entry.getValue());
+                    printer.printRecord(k.getKitolto(), entry.getKey(), entry.getValue(), k.getKitoltesDatuma());
                 }
             }
         }

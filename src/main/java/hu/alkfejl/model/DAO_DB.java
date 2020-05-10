@@ -412,11 +412,11 @@ public class DAO_DB implements DAO{
     public List<Kitoltes> getKitoltesek(int kerdoivID) {
         List<Kitoltes> list = new ArrayList<>();
         try(Connection conn = DriverManager.getConnection(DB_FILE); Statement st = conn.createStatement();){
-            ResultSet rs = st.executeQuery("SELECT id, kitolto, valaszok FROM Kitoltes WHERE kerdoivID="+kerdoivID);
+            ResultSet rs = st.executeQuery("SELECT id, kitolto, valaszok, kitoltesIdeje FROM Kitoltes WHERE kerdoivID="+kerdoivID);
             System.out.println("Query vegrehajtva");
             while(rs.next()){
                 Map<String, String> map = processKitoltes(rs.getString(3), kerdoivID);
-                Kitoltes k = new Kitoltes(rs.getInt(1), kerdoivID, rs.getString(2), map);
+                Kitoltes k = new Kitoltes(rs.getInt(1), kerdoivID, rs.getString(2), map, rs.getString(4));
                 list.add(k);
             }
         } catch (SQLException e) {

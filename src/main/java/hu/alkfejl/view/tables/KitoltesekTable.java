@@ -13,15 +13,17 @@ public class KitoltesekTable extends TableView {
         TableColumn<Kitoltes, Integer> col_id = new TableColumn("ID");
         TableColumn<Kitoltes, String> col_szoveg = new TableColumn("Kitöltő neve");
         TableColumn<Kitoltes, String> col_valaszok = new TableColumn("Kitöltő neve");
+        TableColumn<Kitoltes, String> col_ido = new TableColumn("Kitöltés ideje");
         col_szoveg.setMinWidth(500d);
         col_id.setMinWidth(50d);
         this.setMinHeight(645);
         col_id.setCellValueFactory(data -> data.getValue().idProperty().asObject());
         col_szoveg.setCellValueFactory(data -> data.getValue().kitoltoProperty());
         col_valaszok.setCellValueFactory(data -> data.getValue().valaszokProperty());
+        col_ido.setCellValueFactory(data -> data.getValue().kitoltesDatumaProperty());
 
         refresh(valasz);
-        this.getColumns().addAll(col_id, col_szoveg, col_valaszok);
+        this.getColumns().addAll(col_id, col_szoveg, col_valaszok, col_ido);
     }
 
     public void refresh(List<Kitoltes> v) {

@@ -13,12 +13,14 @@ public class Kitoltes {
     IntegerProperty kerdoivID = new SimpleIntegerProperty();
     StringProperty kitolto = new SimpleStringProperty();
     Map<String, String> valaszok;
+    StringProperty kitoltesDatuma = new SimpleStringProperty();
 
-    public Kitoltes(int id, int kerdoivID, String kitolto, Map<String, String> valaszok) {
+    public Kitoltes(int id, int kerdoivID, String kitolto, Map<String, String> valaszok, String kitoltesDatuma) {
         setId(id);
         setKerdoivID(kerdoivID);
         setKitolto(kitolto);
         this.valaszok = valaszok;
+        setKitoltesDatuma(kitoltesDatuma);
     }
 
     @Override
@@ -74,6 +76,19 @@ public class Kitoltes {
     public void setValaszok(Map<String, String> valaszok) {
         this.valaszok = valaszok;
     }
+
+    public String getKitoltesDatuma() {
+        return kitoltesDatuma.get();
+    }
+
+    public StringProperty kitoltesDatumaProperty() {
+        return kitoltesDatuma;
+    }
+
+    public void setKitoltesDatuma(String kitoltesDatuma) {
+        this.kitoltesDatuma.set(kitoltesDatuma);
+    }
+
 
     public StringProperty valaszokProperty() {
         String value = "";
