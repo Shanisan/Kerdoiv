@@ -14,7 +14,6 @@ hu\alkfejl\view\tables\KerdoivekTablazat.class
 hu\alkfejl\App.class
 hu\alkfejl\controller\EmailSender.class
 hu\alkfejl\model\bean\DatabaseObject.class
-hu\alkfejl\model\DriveConnection.class
 hu\alkfejl\view\tables\KerdesekTablazat.class
 hu\alkfejl\view\dialogs\AddValaszDialog.class
 hu\alkfejl\view\dialogs\AddKerdesDialog.class

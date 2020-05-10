@@ -134,7 +134,6 @@ public class ControllerImpl implements Controller {
         }
         try {
             //return new Deleter(delKerdoiv, delKerdesek, delValaszok, delKepek).call();
-            //todo kep torlese csak ha az adatbazisbol is toroltuk
             boolean ret = dao.deleteEverything(delKerdoiv, delKerdesek, delValaszok);
             if(ret){
                 for (File f:delKepek) {

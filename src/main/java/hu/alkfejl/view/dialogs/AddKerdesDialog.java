@@ -79,6 +79,8 @@ public class AddKerdesDialog {
                     WarningShower.showWarning("A sorszámnak egész számnak kell lennie");
                     return;
                 }
+            }else{
+                sorszam=0;
             }
             if(sorszam<0&&sorszam!=Integer.MIN_VALUE){
                 WarningShower.showWarning("A sorszámnak pozitív egész számnak kell lennie");
