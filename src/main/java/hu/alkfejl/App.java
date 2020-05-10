@@ -56,7 +56,7 @@ public class App extends Application {
         root=new VBox();
         stage.setTitle("Kérdőívek listája");
         scene = new Scene(root, 1280, 720);
-        boolean autoLogIn = true;
+        boolean autoLogIn = false;
         if(!autoLogIn){
             LoginWindow lw = new LoginWindow(scene.getWindow());
         }else{
