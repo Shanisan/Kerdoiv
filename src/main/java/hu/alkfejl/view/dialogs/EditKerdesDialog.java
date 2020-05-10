@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -39,26 +40,29 @@ public class EditKerdesDialog {
         fileChooser.setTitle("Fájl kiválasztása");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image files","*.jpg", "*.png"));
         Button button = new Button("Fájl kiválasztása");
+        //String labelelotag = "\t\t\t\t";
         Label label = new Label("Nincs fájl kiválasztva");
         final File[] file = new File[1];
         button.setOnAction(e->{
-                file[0] = fileChooser.showOpenDialog(stage);
-                if(file[0]!=null) {
-                    label.setText(file[0].getName());
-                }else{
-                    label.setText("Nincs fájl kiválasztva");
-                }
-            });
+            file[0] = fileChooser.showOpenDialog(stage);
+            if(file[0]!=null) {
+                label.setText(file[0].getName());
+            }else{
+                label.setText("Nincs fájl kiválasztva");
+            }
+        });
         pane.add(new Label("Kép (opcionális)"),0,3);
-        pane.add(button,1,3);
-        pane.add(label,2,3);
-        pane.add(new Label("Kép törlése?"), 3, 3);
+        //pane.add(button,1,3);
+        //pane.add(label,1,3);
+        pane.add(new HBox(button, label), 1, 3);
+
+        pane.add(new Label("      Kép törlése?"), 0, 4);
         CheckBox delete = new CheckBox();
-        pane.add(delete, 4, 3);
+        pane.add(delete, 0, 4);
 
         TextField sorszamTF = new TextField(Integer.toString(k.getSorszam()));
-        pane.add(new Label("Sorszám (opcionális)"), 0, 4);
-        pane.add(sorszamTF, 1, 4);
+        pane.add(new Label("Sorszám (opcionális)"), 0, 5);
+        pane.add(sorszamTF, 1, 5);
 //endregion
         Button cancel = new Button("Cancel");
         cancel.setOnAction(e -> {
@@ -105,8 +109,8 @@ public class EditKerdesDialog {
             }
         });
 
-        pane.add(cancel, 0, 5);
-        pane.add(ok, 1, 5);
+        pane.add(cancel, 0, 6);
+        pane.add(ok, 1, 6);
 
         Scene scene = new Scene(pane, 800, 400);
         stage.setScene(scene);

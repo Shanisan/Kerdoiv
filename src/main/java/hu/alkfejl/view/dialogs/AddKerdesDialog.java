@@ -12,6 +12,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -40,19 +41,21 @@ public class AddKerdesDialog {
         fileChooser.setTitle("Fájl kiválasztása");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image files","*.jpg", "*.png"));
         Button button = new Button("Fájl kiválasztása");
+        //String labelelotag = "\t\t\t\t";
         Label label = new Label("Nincs fájl kiválasztva");
         final File[] file = new File[1];
         button.setOnAction(e->{
-                file[0] = fileChooser.showOpenDialog(stage);
-                if(file[0]!=null) {
-                    label.setText(file[0].getName());
-                }else{
-                    label.setText("Nincs fájl kiválasztva");
-                }
-            });
+            file[0] = fileChooser.showOpenDialog(stage);
+            if(file[0]!=null) {
+                label.setText(file[0].getName());
+            }else{
+                label.setText("Nincs fájl kiválasztva");
+            }
+        });
         pane.add(new Label("Kép (opcionális)"),0,3);
-        pane.add(button,1,3);
-        pane.add(label,2,3);
+        //pane.add(button,1,3);
+        //pane.add(label,1,3);
+        pane.add(new HBox(button, label), 1, 3);
 
         TextField sorszamTF = new TextField();
         pane.add(new Label("Sorszám (opcionális)"), 0, 4);
