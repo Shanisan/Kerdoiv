@@ -2,6 +2,7 @@ package hu.alkfejl.controller;
 
 import hu.alkfejl.model.bean.Kerdes;
 import hu.alkfejl.model.bean.Kerdoiv;
+import hu.alkfejl.model.bean.Kitoltes;
 import hu.alkfejl.model.bean.Valasz;
 
 import java.util.List;
@@ -27,4 +28,6 @@ public interface Controller {
     boolean addValasz(Valasz v);
 
     boolean editValasz(Valasz v);
+
+    List<Kitoltes> getKitoltesek(int kerdoivID);
 }

@@ -9,7 +9,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DAO_DB implements DAO{
 
@@ -405,5 +407,38 @@ public class DAO_DB implements DAO{
             e.printStackTrace();
         }
         return false;
+    }
+
+    public List<Kitoltes> getKitoltesek(int kerdoivID) {
+        List<Kitoltes> list = new ArrayList<>();
+        try(Connection conn = DriverManager.getConnection(DB_FILE); Statement st = conn.createStatement();){
+            ResultSet rs = st.executeQuery("SELECT id, kitolto, valaszok FROM Kitoltes WHERE kerdoivID="+kerdoivID);
+            System.out.println("Query vegrehajtva");
+            while(rs.next()){
+                Map<String, String> map = processKitoltes(rs.getString(3), kerdoivID);
+                Kitoltes k = new Kitoltes(rs.getInt(1), kerdoivID, rs.getString(2), map);
+                list.add(k);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    private Map<String, String> processKitoltes(String kitoltesek, int kerdoivID){
+        String[] strs = kitoltesek.split("\\|");
+        List<Kerdes> kerdesek = getKerdesekList(kerdoivID);
+        Map<Integer, String> kerdMap = new HashMap<>();
+        for (Kerdes k:kerdesek) {
+            kerdMap.put(k.getId(), k.getSzoveg());
+        }
+        Map<String, String> map = new HashMap<>();
+        for (String s:strs) {
+            //System.out.println("Splitting :" + s);
+            String[] s2 = s.split("~");
+            String kerdesSzoveg = kerdMap.get(Integer.parseInt(s2[0]));
+            map.put(kerdesSzoveg, s2[1]);
+        }
+        return map;
     }
 }

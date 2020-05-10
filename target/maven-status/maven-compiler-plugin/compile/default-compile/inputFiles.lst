@@ -3,6 +3,7 @@ C:\Users\barat\IdeaProjects\Kerdoiv\src\main\java\hu\alkfejl\view\dialogs\AddKer
 C:\Users\barat\IdeaProjects\Kerdoiv\src\main\java\hu\alkfejl\view\dialogs\EditKerdesDialog.java
 C:\Users\barat\IdeaProjects\Kerdoiv\src\main\java\hu\alkfejl\model\bean\Kerdes.java
 C:\Users\barat\IdeaProjects\Kerdoiv\src\main\java\hu\alkfejl\view\dialogs\AddValaszDialog.java
+C:\Users\barat\IdeaProjects\Kerdoiv\src\main\java\hu\alkfejl\view\tables\KitoltesekTable.java
 C:\Users\barat\IdeaProjects\Kerdoiv\src\main\java\hu\alkfejl\model\bean\DatabaseObject.java
 C:\Users\barat\IdeaProjects\Kerdoiv\src\main\java\hu\alkfejl\view\dialogs\WarningShower.java
 C:\Users\barat\IdeaProjects\Kerdoiv\src\main\java\hu\alkfejl\view\dialogs\LoginWindow.java
@@ -23,5 +24,6 @@ C:\Users\barat\IdeaProjects\Kerdoiv\src\main\java\hu\alkfejl\view\tables\Kerdoiv
 C:\Users\barat\IdeaProjects\Kerdoiv\src\main\java\hu\alkfejl\controller\EmailSender.java
 C:\Users\barat\IdeaProjects\Kerdoiv\src\main\java\hu\alkfejl\model\bean\Valasz.java
 C:\Users\barat\IdeaProjects\Kerdoiv\src\main\java\hu\alkfejl\controller\ControllerImpl.java
+C:\Users\barat\IdeaProjects\Kerdoiv\src\main\java\hu\alkfejl\model\bean\Kitoltes.java
 C:\Users\barat\IdeaProjects\Kerdoiv\src\main\java\hu\alkfejl\controller\Controller.java
 C:\Users\barat\IdeaProjects\Kerdoiv\src\main\java\hu\alkfejl\view\dialogs\EditValaszDialog.java

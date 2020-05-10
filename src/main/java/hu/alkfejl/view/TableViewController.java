@@ -4,12 +4,16 @@ import hu.alkfejl.App;
 import hu.alkfejl.controller.ControllerImpl;
 import hu.alkfejl.model.bean.Kerdes;
 import hu.alkfejl.model.bean.Kerdoiv;
+import hu.alkfejl.model.bean.Kitoltes;
 import hu.alkfejl.model.bean.TableTypes;
 import hu.alkfejl.view.dialogs.WarningShower;
 import hu.alkfejl.view.tables.KerdesekTablazat;
 import hu.alkfejl.view.tables.KerdoivekTablazat;
+import hu.alkfejl.view.tables.KitoltesekTable;
 import hu.alkfejl.view.tables.ValaszokTablazat;
 import javafx.scene.control.TableView;
+
+import java.util.List;
 
 public class TableViewController {
     private ControllerImpl controller;
@@ -17,6 +21,7 @@ public class TableViewController {
     KerdoivekTablazat kivtable;
     KerdesekTablazat kstable;
     ValaszokTablazat vtable;
+    KitoltesekTable kttable;
     int kerdoivID;
     int kerdesID;
 
@@ -58,7 +63,7 @@ public class TableViewController {
                             kerdesID = k.getId();
                             vtable = new ValaszokTablazat(controller.getValaszList(kerdesID));
                             App.refreshTable("A '"+k.getSzoveg()+"' kérdéshez kapcsolódó válaszlehetőségek");
-                            System.out.println("Set the table to show answers from question " + k.getId());
+                            //System.out.println("Set the table to show answers from question " + k.getId());
                         }else{
                             WarningShower.showWarning("Csak a feleletválasztós kérdésekhez tartoznak válaszlehetőségek.");
                         }
@@ -73,6 +78,15 @@ public class TableViewController {
                     }
                     break;
                 case VALASZADAS:
+                    try{
+                        Kerdoiv k = (Kerdoiv) kivtable.getSelectionModel().getSelectedItem();
+                        kerdoivID = k.getId();
+                        kttable=new KitoltesekTable(controller.getKitoltesek(kerdoivID));
+                        App.refreshTable("A +"+k.getNev()+" kérdőívhez tartozó kitöltések listája.");
+                    }catch(NullPointerException npe){
+                        WarningShower.showWarning("Nincs kiválasztott elem");
+                        return false;
+                    }
                     break;
             }
         }catch(ClassCastException cce){
@@ -95,6 +109,7 @@ public class TableViewController {
                     vtable.refresh(App.controller.getValaszList(kerdesID));
                     break;
                 case VALASZADAS:
+                    kttable.refresh(App.controller.getKitoltesek(kerdoivID));
                     break;
             }
         }catch(ClassCastException cce){
@@ -111,7 +126,7 @@ public class TableViewController {
             case VALASZ:
                 return vtable;
             case VALASZADAS:
-                break;
+                return kttable;
         }
         return null;
     }

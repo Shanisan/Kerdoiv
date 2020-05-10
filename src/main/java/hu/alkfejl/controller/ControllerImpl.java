@@ -4,6 +4,7 @@ import hu.alkfejl.App;
 import hu.alkfejl.model.DAO_DB;
 import hu.alkfejl.model.bean.Kerdes;
 import hu.alkfejl.model.bean.Kerdoiv;
+import hu.alkfejl.model.bean.Kitoltes;
 import hu.alkfejl.model.bean.Valasz;
 import javafx.concurrent.Task;
 
@@ -210,5 +211,14 @@ public class ControllerImpl implements Controller {
     @Override
     public boolean editValasz(Valasz v) {
         return dao.editValasz(v);
+    }
+
+    @Override
+    public List<Kitoltes> getKitoltesek(int kerdoivID) {
+        List<Kitoltes> k =dao.getKitoltesek(kerdoivID);
+        for (Kitoltes ksk:k) {
+            System.out.println(ksk.toString());
+        }
+        return k;
     }
 }

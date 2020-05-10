@@ -42,6 +42,7 @@ public class ButtonRow extends HBox {
         });
         vissza.setOnAction(e->{
             switch (App.TVC.getCurrentlyActiveTable()){
+                case VALASZADAS:
                 case KERDES:
                     if(App.TVC.setCurrentlyActiveTable(TableTypes.KERDOIV)){
                         switchButtonRow();
@@ -111,6 +112,12 @@ public class ButtonRow extends HBox {
                 System.out.println("Valaszokat kellene latnunk");
             }
         });
+        kitoltesek.setOnAction(e->{
+            if(App.TVC.setCurrentlyActiveTable(TableTypes.VALASZADAS)){
+                switchButtonRow();
+                System.out.println("Kitolteseket kellene latnunk");
+            }
+        });
         test.setOnAction(e->{
             //DriveConnection.downloadData();
         });
@@ -134,6 +141,8 @@ public class ButtonRow extends HBox {
                 this.getChildren().addAll(vissza, addValasz, szerkeszt, torol);
                 break;
             case VALASZADAS:
+                displayNone();
+                this.getChildren().addAll(vissza);
                 break;
         }
     }

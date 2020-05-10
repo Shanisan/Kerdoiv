@@ -2,6 +2,7 @@ package hu.alkfejl.model;
 
 import hu.alkfejl.model.bean.Kerdes;
 import hu.alkfejl.model.bean.Kerdoiv;
+import hu.alkfejl.model.bean.Kitoltes;
 import hu.alkfejl.model.bean.Valasz;
 
 import java.sql.SQLException;
@@ -26,4 +27,6 @@ public interface DAO {
     boolean addValasz(Valasz v);
 
     boolean editValasz(Valasz v);
+
+    List<Kitoltes> getKitoltesek(int kerdoivID);
 }
