@@ -52,7 +52,7 @@ public class KerdoivekTablazat extends TableView{
         col_link.setCellValueFactory(data -> data.getValue().linkProperty());
         col_letrehozta.setCellValueFactory(data -> data.getValue().letrehozoProperty());
         refresh(kerdoiv);
-        this.getColumns().addAll(col_id, col_nev, col_kerdesek, col_kitoltesek, col_kezdet, col_vege, col_ido, col_link, col_letrehozta);
+        this.getColumns().addAll(col_id, col_nev, col_kerdesek, col_kitoltesek, col_kezdet, col_vege, col_ido, col_letrehozta);
     }
 
     public void refresh(List<Kerdoiv> k) {

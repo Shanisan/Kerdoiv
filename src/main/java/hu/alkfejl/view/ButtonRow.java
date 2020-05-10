@@ -27,10 +27,8 @@ public class ButtonRow extends HBox {
     Button addKerdes = new Button("Új kérdés");
     //valaszos gombok
     Button addValasz = new Button("Új válaszlehetőság");
-
-
     //kitolteses gombok
-
+    Button csv = new Button("Exportálás CSV formátumban");
 
 
     public ButtonRow() {
@@ -121,6 +119,9 @@ public class ButtonRow extends HBox {
         test.setOnAction(e->{
             //DriveConnection.downloadData();
         });
+        csv.setOnAction(e->{
+            new CSVDialog(App.controller, App.TVC.kerdoivID);
+        });
         switchButtonRow();
         this.setPadding(new Insets(5));
         this.setSpacing(5);
@@ -142,7 +143,7 @@ public class ButtonRow extends HBox {
                 break;
             case VALASZADAS:
                 displayNone();
-                this.getChildren().addAll(vissza);
+                this.getChildren().addAll(vissza, csv);
                 break;
         }
     }
